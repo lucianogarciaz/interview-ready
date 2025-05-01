@@ -92,7 +92,7 @@ func TestZeroMatrix(t *testing.T) {
 				copy(inputCopy[i], row)
 			}
 
-			result := zeroMatrix(inputCopy)
+			result := zeroMatrix2(inputCopy)
 
 			// Check if the result matches the expected output
 			if !matrixEqual(result, tc.expected) {
