@@ -11,12 +11,12 @@ func TestAddBinary(t *testing.T) {
 		b        string
 		expected string
 	}{
-		// {
-		// 	name:     "Example 1",
-		// 	a:        "11",
-		// 	b:        "1",
-		// 	expected: "100",
-		// },
+		{
+			name:     "Example 1",
+			a:        "11",
+			b:        "1",
+			expected: "100",
+		},
 		{
 			name:     "Example 2",
 			a:        "1010",

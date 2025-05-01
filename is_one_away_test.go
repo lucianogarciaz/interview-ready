@@ -9,30 +9,30 @@ func TestIsOneAway(t *testing.T) {
 		s2       string
 		expected bool
 	}{
-		// {
-		// 	name:     "Same strings",
-		// 	s1:       "pale",
-		// 	s2:       "pale3",
-		// 	expected: true,
-		// },
-		// {
-		// 	name:     "Same strings",
-		// 	s1:       "pale",
-		// 	s2:       "pale",
-		// 	expected: true,
-		// },
-		// {
-		// 	name:     "One character replaced",
-		// 	s1:       "pale",
-		// 	s2:       "bale",
-		// 	expected: true,
-		// },
-		// {
-		// 	name:     "One character inserted",
-		// 	s1:       "pale",
-		// 	s2:       "pales",
-		// 	expected: true,
-		// },
+		{
+			name:     "Same strings",
+			s1:       "pale",
+			s2:       "pale3",
+			expected: true,
+		},
+		{
+			name:     "Same strings",
+			s1:       "pale",
+			s2:       "pale",
+			expected: true,
+		},
+		{
+			name:     "One character replaced",
+			s1:       "pale",
+			s2:       "bale",
+			expected: true,
+		},
+		{
+			name:     "One character inserted",
+			s1:       "pale",
+			s2:       "pales",
+			expected: true,
+		},
 		{
 			name:     "One character removed",
 			s1:       "pales",
