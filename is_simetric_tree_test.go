@@ -7,28 +7,28 @@ import (
 func TestIsSymmetricTree(t *testing.T) {
 	testCases := []struct {
 		name     string
-		root     *TreeNode
+		root     *BinaryTreeNode
 		expected bool
 	}{
 		{
 			name: "Example 1: Symmetric tree [1,2,2,3,4,4,3]",
-			root: &TreeNode{
+			root: &BinaryTreeNode{
 				Val: 1,
-				Left: &TreeNode{
+				Left: &BinaryTreeNode{
 					Val: 2,
-					Left: &TreeNode{
+					Left: &BinaryTreeNode{
 						Val: 3,
 					},
-					Right: &TreeNode{
+					Right: &BinaryTreeNode{
 						Val: 4,
 					},
 				},
-				Right: &TreeNode{
+				Right: &BinaryTreeNode{
 					Val: 2,
-					Left: &TreeNode{
+					Left: &BinaryTreeNode{
 						Val: 4,
 					},
-					Right: &TreeNode{
+					Right: &BinaryTreeNode{
 						Val: 3,
 					},
 				},
@@ -37,17 +37,17 @@ func TestIsSymmetricTree(t *testing.T) {
 		},
 		{
 			name: "Example 2: Non-symmetric tree [1,2,2,null,3,null,3]",
-			root: &TreeNode{
+			root: &BinaryTreeNode{
 				Val: 1,
-				Left: &TreeNode{
+				Left: &BinaryTreeNode{
 					Val: 2,
-					Right: &TreeNode{
+					Right: &BinaryTreeNode{
 						Val: 3,
 					},
 				},
-				Right: &TreeNode{
+				Right: &BinaryTreeNode{
 					Val: 2,
-					Right: &TreeNode{
+					Right: &BinaryTreeNode{
 						Val: 3,
 					},
 				},
@@ -61,19 +61,19 @@ func TestIsSymmetricTree(t *testing.T) {
 		},
 		{
 			name: "Single node tree is symmetric",
-			root: &TreeNode{
+			root: &BinaryTreeNode{
 				Val: 1,
 			},
 			expected: true,
 		},
 		{
 			name: "Different values at same position",
-			root: &TreeNode{
+			root: &BinaryTreeNode{
 				Val: 1,
-				Left: &TreeNode{
+				Left: &BinaryTreeNode{
 					Val: 2,
 				},
-				Right: &TreeNode{
+				Right: &BinaryTreeNode{
 					Val: 3,
 				},
 			},
@@ -81,23 +81,23 @@ func TestIsSymmetricTree(t *testing.T) {
 		},
 		{
 			name: "Deeper symmetric tree",
-			root: &TreeNode{
+			root: &BinaryTreeNode{
 				Val: 1,
-				Left: &TreeNode{
+				Left: &BinaryTreeNode{
 					Val: 2,
-					Left: &TreeNode{
+					Left: &BinaryTreeNode{
 						Val: 3,
 					},
-					Right: &TreeNode{
+					Right: &BinaryTreeNode{
 						Val: 4,
 					},
 				},
-				Right: &TreeNode{
+				Right: &BinaryTreeNode{
 					Val: 2,
-					Left: &TreeNode{
+					Left: &BinaryTreeNode{
 						Val: 4,
 					},
-					Right: &TreeNode{
+					Right: &BinaryTreeNode{
 						Val: 3,
 					},
 				},

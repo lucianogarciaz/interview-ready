@@ -8,16 +8,16 @@ import (
 func TestInorderTraversal(t *testing.T) {
 	testCases := []struct {
 		name     string
-		root     *TreeNode
+		root     *BinaryTreeNode
 		expected []int
 	}{
 		{
 			name: "Example 1: [1,null,2,3]",
-			root: &TreeNode{
+			root: &BinaryTreeNode{
 				Val: 1,
-				Right: &TreeNode{
+				Right: &BinaryTreeNode{
 					Val: 2,
-					Left: &TreeNode{
+					Left: &BinaryTreeNode{
 						Val: 3,
 					},
 				},
@@ -26,28 +26,28 @@ func TestInorderTraversal(t *testing.T) {
 		},
 		{
 			name: "Example 2: [1,2,3,4,5,null,8,null,null,6,7,9]",
-			root: &TreeNode{
+			root: &BinaryTreeNode{
 				Val: 1,
-				Left: &TreeNode{
+				Left: &BinaryTreeNode{
 					Val: 2,
-					Left: &TreeNode{
+					Left: &BinaryTreeNode{
 						Val: 4,
 					},
-					Right: &TreeNode{
+					Right: &BinaryTreeNode{
 						Val: 5,
-						Left: &TreeNode{
+						Left: &BinaryTreeNode{
 							Val: 6,
 						},
-						Right: &TreeNode{
+						Right: &BinaryTreeNode{
 							Val: 7,
 						},
 					},
 				},
-				Right: &TreeNode{
+				Right: &BinaryTreeNode{
 					Val: 3,
-					Right: &TreeNode{
+					Right: &BinaryTreeNode{
 						Val: 8,
-						Left: &TreeNode{
+						Left: &BinaryTreeNode{
 							Val: 9,
 						},
 					},
@@ -62,7 +62,7 @@ func TestInorderTraversal(t *testing.T) {
 		},
 		{
 			name: "Example 4: Single node",
-			root: &TreeNode{
+			root: &BinaryTreeNode{
 				Val: 1,
 			},
 			expected: []int{1},

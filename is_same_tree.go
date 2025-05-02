@@ -1,6 +1,6 @@
 package main
 
-func isSameTree(p *TreeNode, q *TreeNode) bool {
+func isSameTree(p *BinaryTreeNode, q *BinaryTreeNode) bool {
 	if p == nil && q == nil {
 		return true
 	}

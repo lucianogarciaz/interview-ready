@@ -1,18 +1,18 @@
 package main
 
 // * Definition for a binary tree node.
-type TreeNode struct {
+type BinaryTreeNode struct {
 	Val   int
-	Left  *TreeNode
-	Right *TreeNode
+	Left  *BinaryTreeNode
+	Right *BinaryTreeNode
 }
 
-func inorderTraversal(root *TreeNode) []int {
+func inorderTraversal(root *BinaryTreeNode) []int {
 	return recursive(root, []int{})
 }
 
 // [4]
-func recursive(root *TreeNode, results []int) []int {
+func recursive(root *BinaryTreeNode, results []int) []int {
 	if root == nil {
 		return results
 	}

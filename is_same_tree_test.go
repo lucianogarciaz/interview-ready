@@ -7,27 +7,27 @@ import (
 func TestIsSameTree(t *testing.T) {
 	testCases := []struct {
 		name     string
-		p        *TreeNode
-		q        *TreeNode
+		p        *BinaryTreeNode
+		q        *BinaryTreeNode
 		expected bool
 	}{
 		{
 			name: "Example 1: Same trees [1,2,3]",
-			p: &TreeNode{
+			p: &BinaryTreeNode{
 				Val: 1,
-				Left: &TreeNode{
+				Left: &BinaryTreeNode{
 					Val: 2,
 				},
-				Right: &TreeNode{
+				Right: &BinaryTreeNode{
 					Val: 3,
 				},
 			},
-			q: &TreeNode{
+			q: &BinaryTreeNode{
 				Val: 1,
-				Left: &TreeNode{
+				Left: &BinaryTreeNode{
 					Val: 2,
 				},
-				Right: &TreeNode{
+				Right: &BinaryTreeNode{
 					Val: 3,
 				},
 			},
@@ -35,15 +35,15 @@ func TestIsSameTree(t *testing.T) {
 		},
 		{
 			name: "Example 2: Different trees [1,2] and [1,null,2]",
-			p: &TreeNode{
+			p: &BinaryTreeNode{
 				Val: 1,
-				Left: &TreeNode{
+				Left: &BinaryTreeNode{
 					Val: 2,
 				},
 			},
-			q: &TreeNode{
+			q: &BinaryTreeNode{
 				Val: 1,
-				Right: &TreeNode{
+				Right: &BinaryTreeNode{
 					Val: 2,
 				},
 			},
@@ -51,21 +51,21 @@ func TestIsSameTree(t *testing.T) {
 		},
 		{
 			name: "Example 3: Different trees [1,2,1] and [1,1,2]",
-			p: &TreeNode{
+			p: &BinaryTreeNode{
 				Val: 1,
-				Left: &TreeNode{
+				Left: &BinaryTreeNode{
 					Val: 2,
 				},
-				Right: &TreeNode{
+				Right: &BinaryTreeNode{
 					Val: 1,
 				},
 			},
-			q: &TreeNode{
+			q: &BinaryTreeNode{
 				Val: 1,
-				Left: &TreeNode{
+				Left: &BinaryTreeNode{
 					Val: 1,
 				},
-				Right: &TreeNode{
+				Right: &BinaryTreeNode{
 					Val: 2,
 				},
 			},
@@ -79,7 +79,7 @@ func TestIsSameTree(t *testing.T) {
 		},
 		{
 			name: "One tree is nil",
-			p: &TreeNode{
+			p: &BinaryTreeNode{
 				Val: 1,
 			},
 			q:        nil,
@@ -87,10 +87,10 @@ func TestIsSameTree(t *testing.T) {
 		},
 		{
 			name: "Different values at root",
-			p: &TreeNode{
+			p: &BinaryTreeNode{
 				Val: 1,
 			},
-			q: &TreeNode{
+			q: &BinaryTreeNode{
 				Val: 2,
 			},
 			expected: false,

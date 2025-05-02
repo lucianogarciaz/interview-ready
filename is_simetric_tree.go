@@ -1,6 +1,6 @@
 package main
 
-func isSymmetric(root *TreeNode) bool {
+func isSymmetric(root *BinaryTreeNode) bool {
 	if root == nil {
 		return true
 	}
@@ -8,7 +8,7 @@ func isSymmetric(root *TreeNode) bool {
 	return areTheSame(root.Left, root.Right)
 }
 
-func areTheSame(left *TreeNode, right *TreeNode) bool {
+func areTheSame(left *BinaryTreeNode, right *BinaryTreeNode) bool {
 	if left == nil && right == nil {
 		return true
 	}
