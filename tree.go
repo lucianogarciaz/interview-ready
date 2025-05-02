@@ -24,8 +24,8 @@ func Bfs(t *TreeNode) {
 	queue := []*TreeNode{t}
 	for len(queue) > 0 {
 		// do any calculations
-		t = queue[len(queue)-1]
-		queue = queue[:len(queue)-1]
+		t = queue[0]
+		queue = queue[1:len(queue)]
 
 		if t.Left != nil {
 			queue = append(queue, t.Left)
