@@ -28,6 +28,10 @@ func (s *Stack) Pop() int {
 	return value
 }
 
+func (s *Stack) IsEmpty() bool {
+	return len(s.stack) == 0
+}
+
 func (s *Stack) Push(value int) {
 	s.stack = append(s.stack, value)
 
