@@ -49,6 +49,10 @@ func TestPowerSet(t *testing.T) {
 			if !areSlicesEqual(result, tt.expected) {
 				t.Errorf("powerSet(%v) = %v; want %v", tt.input, result, tt.expected)
 			}
+			result = powerSetBacktrack(tt.input)
+			if !areSlicesEqual(result, tt.expected) {
+				t.Errorf("powerSet(%v) = %v; want %v", tt.input, result, tt.expected)
+			}
 		})
 	}
 }
