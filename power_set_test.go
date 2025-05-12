@@ -80,3 +80,63 @@ func areSlicesEqual(a, b [][]int) bool {
 	// Compare the maps
 	return reflect.DeepEqual(mapA, mapB)
 }
+
+func TestPowerSetWithDuplicates(t *testing.T) {
+	tests := []struct {
+		name     string
+		input    []int
+		expected [][]int
+	}{
+		{
+			name:  "empty array",
+			input: []int{},
+			expected: [][]int{
+				{},
+			},
+		},
+		{
+			name:  "single element",
+			input: []int{1},
+			expected: [][]int{
+				{},
+				{1},
+			},
+		},
+		{
+			name:  "array with duplicates",
+			input: []int{1, 2, 2},
+			expected: [][]int{
+				{},
+				{1},
+				{2},
+				{1, 2},
+				{2, 2},
+				{1, 2, 2},
+			},
+		},
+		{
+			name:  "array with multiple duplicates",
+			input: []int{1, 1, 2, 2},
+			expected: [][]int{
+				{},
+				{1},
+				{2},
+				{1, 1},
+				{1, 2},
+				{2, 2},
+				{1, 1, 2},
+				{1, 2, 2},
+				{1, 1, 2, 2},
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := powerSetWithDuplicates(tt.input)
+			if !areSlicesEqual(result, tt.expected) {
+				t.Errorf("powerSetWithDuplicates(%v) = %v; want %v", tt.input, result, tt.expected)
+			}
+		})
+	}
+}
