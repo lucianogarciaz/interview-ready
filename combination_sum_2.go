@@ -1,6 +1,8 @@
 package main
 
-import "slices"
+import (
+	"slices"
+)
 
 func combinationSum2(candidates []int, target int) [][]int {
 	if len(candidates) == 0 {
@@ -44,6 +46,5 @@ func isValidCombination(target int, current []int) (int, bool) {
 	for _, v := range current {
 		sum += v
 	}
-
 	return sum, target-sum >= 0
 }
