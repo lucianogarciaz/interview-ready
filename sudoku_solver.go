@@ -1,6 +1,8 @@
 package main
 
-import "strconv"
+import (
+	"strconv"
+)
 
 // 1. obtengo la celda con menos candidatos
 // 2. calculo y pongo el valor.
@@ -9,8 +11,7 @@ func solveSudoku(board [][]byte) {
 	for i := 0; i < 9; i++ {
 		candidates[i] = make([][]int, 9)
 		for j := 0; j < 9; j++ {
-			candidates[i][j] = make([]int, 0, 9)
-			candidates = updateCandidates(i, j, candidates, board)
+			updateCandidates(i, j, candidates, board)
 		}
 	}
 
@@ -93,11 +94,11 @@ func neighboors(x, y int, board [][]byte) [][]int {
 	return neighboor
 }
 
-func updateCandidates(x, y int, candidates [][][]int, board [][]byte) [][][]int {
+func updateCandidates(x, y int, candidates [][][]int, board [][]byte) {
 	can := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
 	candidates[x][y] = []int{}
 	if board[x][y] != byte('.') {
-		return candidates
+		return
 	}
 
 	for i := range board {
@@ -134,5 +135,5 @@ func updateCandidates(x, y int, candidates [][][]int, board [][]byte) [][][]int 
 		}
 	}
 
-	return candidates
+	return
 }
