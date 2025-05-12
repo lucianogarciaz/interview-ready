@@ -3,6 +3,9 @@ package main
 import "slices"
 
 func combinationSum2(candidates []int, target int) [][]int {
+	if len(candidates) == 0 {
+		return [][]int{}
+	}
 	slices.Sort(candidates)
 
 	output := [][]int{}
