@@ -12,6 +12,7 @@ func combinationSum2(candidates []int, target int) [][]int {
 
 	output := [][]int{}
 	current := []int{}
+
 	var backtrack func(s int)
 	backtrack = func(s int) {
 		sum, ok := isValidCombination(target, current)
