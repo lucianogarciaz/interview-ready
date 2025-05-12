@@ -115,6 +115,18 @@ func TestPowerSetWithDuplicates(t *testing.T) {
 			},
 		},
 		{
+			name:  "array with duplicates",
+			input: []int{2, 1, 2},
+			expected: [][]int{
+				{},
+				{1},
+				{2},
+				{1, 2},
+				{2, 2},
+				{1, 2, 2},
+			},
+		},
+		{
 			name:  "array with multiple duplicates",
 			input: []int{1, 1, 2, 2},
 			expected: [][]int{

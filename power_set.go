@@ -43,6 +43,7 @@ func powerSetBacktrack(a []int) [][]int {
 
 func powerSetWithDuplicates(nums []int) [][]int {
 	n := len(nums)
+	slices.Sort(nums)
 	output := make([][]int, 0, n)
 	current := []int{}
 	var backtrack func(s int)
