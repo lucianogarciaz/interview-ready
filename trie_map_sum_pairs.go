@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 type MapSumNode struct {
 	child map[rune]*MapSumNode
 	sum   int
@@ -47,7 +45,6 @@ func (m *MapSum) Insert(key string, val int) {
 	}
 
 	pointer.sum += val
-	fmt.Printf("\n\n")
 }
 
 func (m *MapSum) Sum(prefix string) int {
