@@ -11,6 +11,10 @@ import "math"
 // [1,100,1,2,100,1,1,100,1]
 func minCostClimbingStairs(cost []int) int {
 	// [10, 15, 20]
+	if len(cost) == 1 {
+		return cost[0]
+	}
+
 	memo := make([]int, len(cost))
 	for i := 0; i < len(memo); i++ {
 		memo[i] = -1
