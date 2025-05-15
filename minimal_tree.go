@@ -1,5 +1,12 @@
 package main
 
+// Type: Binary Search Tree / Recursion / Divide and Conquer
+// Difficulty: Medium
+// Companies: This is Exercise 4.2 from "Cracking the Coding Interview" book.
+// Similar to creating a balanced BST in LeetCode problem #108 "Convert Sorted Array to Binary Search Tree".
+// Commonly asked at companies like Google, Amazon, Facebook, and Microsoft.
+// Tests understanding of binary tree construction and recursive algorithms.
+
 // [1,2,3,4,5,6,7,8]
 // marked = 4
 // childs: left: 5 + 0 / 2 = 2   right: 5+ 9 /2:  7

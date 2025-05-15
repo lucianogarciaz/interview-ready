@@ -1,5 +1,11 @@
 package main
 
+// Type: Backtracking / String Manipulation / Recursion
+// Difficulty: Medium
+// Companies: This is LeetCode problem #17 "Letter Combinations of a Phone Number".
+// Frequently asked at companies like Amazon, Google, Microsoft, and Facebook.
+// Tests understanding of backtracking patterns and string manipulation.
+
 func letterCombinations(digits string) []string {
 	if digits == "" {
 		return []string{}

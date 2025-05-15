@@ -4,6 +4,12 @@ import (
 	"slices"
 )
 
+// Type: Backtracking / Combinatorics
+// Difficulty: Medium
+// Companies: This is LeetCode problem #40 "Combination Sum II".
+// Commonly asked at companies like Amazon, Facebook, Google, and Microsoft.
+// Tests understanding of backtracking with duplicate handling and pruning techniques.
+
 func combinationSum2(candidates []int, target int) [][]int {
 	if len(candidates) == 0 {
 		return [][]int{}

@@ -4,6 +4,12 @@ import (
 	"strings"
 )
 
+// Type: Stack / String Parsing
+// Difficulty: Easy to Medium
+// Companies: Similar to LeetCode problem #20 "Valid Parentheses" with a twist for HTML tags.
+// Commonly asked at companies like Amazon, Microsoft, Facebook, and Google.
+// Tests understanding of stack-based validation and string manipulation.
+
 // <app></app>
 func countBrokenTags(strTags string) int {
 	l := 0

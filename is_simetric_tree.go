@@ -1,5 +1,11 @@
 package main
 
+// Type: Binary Tree / Depth-First Search / Recursion
+// Difficulty: Easy
+// Companies: This is LeetCode problem #101 "Symmetric Tree".
+// Commonly asked at companies like Amazon, Microsoft, Facebook, and Google.
+// Tests understanding of tree traversal and mirror image comparison in trees.
+
 func isSymmetric(root *BinaryTreeNode) bool {
 	if root == nil {
 		return true

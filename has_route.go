@@ -1,5 +1,12 @@
 package main
 
+// Type: Graph Traversal / BFS / DFS
+// Difficulty: Medium
+// Companies: This is Exercise 4.1 from "Cracking the Coding Interview" book.
+// Similar to LeetCode problem #1971 "Find if Path Exists in Graph".
+// Commonly asked at companies like Google, Facebook, Amazon, and Microsoft.
+// Tests understanding of graph traversal algorithms and connectivity.
+
 // remember always defining a SET to avoid loops
 func hasRoute(start *GraphNodes, end *GraphNodes) bool {
 	return graphBfs(start, end)

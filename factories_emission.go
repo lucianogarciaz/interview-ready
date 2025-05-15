@@ -4,6 +4,12 @@ import (
 	"sort"
 )
 
+// Type: Greedy Algorithm / Sorting
+// Difficulty: Medium
+// Companies: This type of optimization problem is similar to problems asked at
+// Amazon, Google, and Microsoft. It tests understanding of greedy algorithms
+// and optimization techniques typically found in resource allocation problems.
+
 func factoriesEmission(arr []int) int {
 	sum := float64(0)
 	// sum - arr[i]+arr[i]/filters*2 < half

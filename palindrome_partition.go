@@ -5,6 +5,12 @@ import (
 	"strings"
 )
 
+// Type: Backtracking / String Manipulation / Dynamic Programming
+// Difficulty: Medium
+// Companies: This is similar to LeetCode problem #131 "Palindrome Partitioning".
+// Commonly asked at companies like Amazon, Google, Facebook, and Microsoft.
+// Tests understanding of backtracking and palindrome detection algorithms.
+
 func partitionPalindrome(s string) [][]string {
 	current := []string{}
 	output := [][]string{}
