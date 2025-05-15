@@ -1,5 +1,12 @@
 package main
 
+// Type: Stack / Sorting
+// Difficulty: Medium
+// Companies: This is Exercise 3.5 from "Cracking the Coding Interview" book.
+// Similar stack sorting questions are asked at companies like Amazon, Microsoft,
+// and Google. Tests understanding of stack operations and sorting algorithms
+// with constrained data structures.
+
 type SortStack struct {
 	stack []int
 }

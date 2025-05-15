@@ -2,6 +2,13 @@ package main
 
 import "math"
 
+// Type: Sliding Window / Hash Table
+// Difficulty: Medium
+// Companies: This is LeetCode problem #3 "Longest Substring Without Repeating Characters".
+// Very frequently asked at Amazon, Facebook, Microsoft, Google, and Apple.
+// A classic sliding window problem that tests understanding of string manipulation and
+// efficient data structures.
+
 func lengthOfLongestSubstring(str string) int {
 	if len(str) <= 1 {
 		return len(str)

@@ -6,6 +6,12 @@ import (
 	"strconv"
 )
 
+// Type: Linked List / Math
+// Difficulty: Medium
+// Companies: This is LeetCode problem #2 "Add Two Numbers".
+// Frequently asked at companies like Amazon, Microsoft, Google, and Apple.
+// Tests understanding of linked list manipulation and numerical operations.
+
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	num1 := ""
 	for l1 != nil {

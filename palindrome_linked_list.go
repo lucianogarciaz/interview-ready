@@ -1,5 +1,11 @@
 package main
 
+// Type: Linked List / Two Pointers
+// Difficulty: Easy
+// Companies: This is LeetCode problem #234 "Palindrome Linked List".
+// Commonly asked at companies like Amazon, Microsoft, and Facebook.
+// Tests understanding of linked list manipulation and palindrome detection.
+
 // 1->2->3->4
 // [1,2,3,4]
 

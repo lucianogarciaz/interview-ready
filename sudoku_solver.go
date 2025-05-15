@@ -4,6 +4,12 @@ import (
 	"strconv"
 )
 
+// Type: Backtracking / Constraint Satisfaction
+// Difficulty: Hard
+// Companies: This is LeetCode problem #37 "Sudoku Solver". Frequently asked at
+// Google, Amazon, and Microsoft. Tests deep understanding of backtracking and
+// constraint propagation algorithms.
+
 // 1. obtengo la celda con menos candidatos
 // 2. calculo y pongo el valor.
 func solveSudoku(board [][]byte) {

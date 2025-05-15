@@ -2,6 +2,12 @@ package main
 
 import "math"
 
+// Type: Tree / Binary Search Tree / Recursion
+// Difficulty: Medium
+// Companies: This is similar to LeetCode problem #98 "Validate Binary Search Tree".
+// Commonly asked at companies like Google, Facebook, Amazon, and Microsoft.
+// It tests understanding of BST properties and recursive tree traversal.
+
 // left < root < right
 //	      5
 //	   /    \

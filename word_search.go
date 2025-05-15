@@ -1,5 +1,10 @@
 package main
 
+// Type: Backtracking / DFS (Depth-First Search)
+// Difficulty: Medium
+// Companies: This is LeetCode problem #79 "Word Search" and is frequently asked at
+// Facebook, Amazon, Microsoft, and Google. It's a classic backtracking problem.
+
 func exist(board [][]byte, word string) bool {
 	if len(board) == 0 {
 		return false

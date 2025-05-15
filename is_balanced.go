@@ -2,6 +2,13 @@ package main
 
 import "math"
 
+// Type: Binary Tree / Depth-First Search / Recursion
+// Difficulty: Easy
+// Companies: This is LeetCode problem #110 "Balanced Binary Tree".
+// Commonly asked at companies like Amazon, Microsoft, and Google.
+// It's also Exercise 4.4 in "Cracking the Coding Interview" book.
+// Tests understanding of tree traversal and recursive depth calculation.
+
 func isBalanced(root *TreeNode) bool {
 	isBalanced, _ := isBalancedWithHeight(root)
 	return isBalanced

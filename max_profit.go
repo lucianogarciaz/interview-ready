@@ -2,6 +2,13 @@ package main
 
 import "math"
 
+// Type: Sliding Window / Greedy Algorithm
+// Difficulty: Easy
+// Companies: This is LeetCode problem #121 "Best Time to Buy and Sell Stock".
+// One of the most frequently asked problems at major tech companies including
+// Amazon, Facebook, Microsoft, Google, and Apple. It tests understanding of
+// array traversal and optimization problems.
+
 func maxProfit(prices []int) int {
 	l, r := 0, 1
 	maxP := 0

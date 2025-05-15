@@ -2,6 +2,12 @@ package main
 
 import "math"
 
+// Type: Sliding Window / String Manipulation
+// Difficulty: Medium
+// Companies: This is LeetCode problem #424 "Longest Repeating Character Replacement".
+// Frequently asked at companies like Facebook, Amazon, and Microsoft. It's a classic
+// sliding window problem that tests understanding of efficiency and string manipulation.
+
 func characterReplacement(s string, k int) int {
 	if len(s) <= 1 {
 		return len(s)

@@ -1,5 +1,11 @@
 package main
 
+// Type: Matrix Traversal / Simulation
+// Difficulty: Medium
+// Companies: This is LeetCode problem #59 "Spiral Matrix II".
+// Commonly asked at companies like Amazon, Microsoft, Facebook, and Apple.
+// Tests understanding of matrix traversal and directional movement.
+
 // 1  2  3  4
 // 12 13 14 5
 // 11 16 15 6

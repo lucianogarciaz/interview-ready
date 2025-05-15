@@ -1,5 +1,10 @@
 package main
 
+// Type: Hash Map / Frequency Counter
+// Difficulty: Easy to Medium
+// Companies: This type of frequency counting and string manipulation problem is common in interviews at
+// companies like Google, Amazon, and Microsoft.
+//
 // [ hu  un  ng ga ar ry]
 // [h:u:  u:n:  n:g:  g:a: a:r: r:y]
 // find the first letter.

@@ -4,6 +4,12 @@ import (
 	"slices"
 )
 
+// Type: Backtracking / Recursion / Combinatorics
+// Difficulty: Medium
+// Companies: Similar to LeetCode problems #78 "Subsets" and #90 "Subsets II" (with duplicates).
+// Commonly asked at companies like Google, Facebook, Amazon, and Microsoft.
+// Tests understanding of backtracking, recursion, and combinatorial generation.
+
 func powerSet(a []int) [][]int {
 	if len(a) == 0 {
 		return [][]int{{}}
