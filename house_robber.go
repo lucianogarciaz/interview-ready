@@ -32,7 +32,7 @@ func rob(nums []int) int {
 }
 
 // top-down solution
-func rob2(nums []int) int {
+func robTD(nums []int) int {
 	cost := make([]int, len(nums))
 	for i := 0; i < len(nums); i++ {
 		cost[i] = -1

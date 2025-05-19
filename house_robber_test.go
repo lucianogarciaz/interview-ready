@@ -106,7 +106,55 @@ func TestRob2(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			result := rob2(tc.nums)
+			result := robTD(tc.nums)
+			if result != tc.expected {
+				t.Errorf("Expected %d, but got %d", tc.expected, result)
+			}
+		})
+	}
+}
+
+func TestRobII(t *testing.T) {
+	testCases := []struct {
+		name     string
+		nums     []int
+		expected int
+	}{
+		{
+			name:     "Example 1",
+			nums:     []int{2, 3, 2},
+			expected: 3,
+		},
+		{
+			name:     "Example 2",
+			nums:     []int{1, 2, 3, 1},
+			expected: 4,
+		},
+		{
+			name:     "Single element",
+			nums:     []int{5},
+			expected: 5,
+		},
+		{
+			name:     "Two elements",
+			nums:     []int{2, 1},
+			expected: 2,
+		},
+		{
+			name:     "Circular case",
+			nums:     []int{1, 8, 1, 1, 1000},
+			expected: 1008,
+		},
+		{
+			name:     "All same values",
+			nums:     []int{2, 2, 2, 2},
+			expected: 4,
+		},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			result := robII(tc.nums)
 			if result != tc.expected {
 				t.Errorf("Expected %d, but got %d", tc.expected, result)
 			}
