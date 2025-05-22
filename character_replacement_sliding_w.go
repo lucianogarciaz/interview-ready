@@ -1,6 +1,8 @@
 package main
 
-import "math"
+import (
+	"math"
+)
 
 // Type: Sliding Window / String Manipulation
 // Difficulty: Medium
