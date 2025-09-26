@@ -1,6 +1,7 @@
 import unittest
 
 class Solution:
+    #  The idea here is to first replace the spaces and make the string lowercase. Then we count the number of times each character appears. If the number of times each character appears is odd, then the string is not a palindrome permutation.
     def palindromePermutation(self, s:str)->bool:
         s = s.replace(" ", "")
         

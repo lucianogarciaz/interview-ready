@@ -9,7 +9,7 @@ class Solution:
             if val ==" ":
                 s[i]="%20"
         return "".join(s)
-    
+    # The idea here is to iterate through the string and replace the spaces with %20.
     def urlify(self, s:str)->str:
         res = ""
         for i, val in enumerate(s):

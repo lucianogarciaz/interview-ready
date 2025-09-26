@@ -7,7 +7,7 @@ from typing import List
 # 1 0 3
 # 0 0 0
 # 6 0 8
-
+# The idea here is to first find the coordinates of the zeros and then set the row and column to 0.
 class Solution:
     def setZeroes(self, matrix: List[List[int]]) -> None:
         n = len(matrix)
