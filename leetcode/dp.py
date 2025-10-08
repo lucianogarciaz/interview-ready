@@ -1,9 +1,22 @@
 import unittest
+from typing import List
 
 class Solution:
     def __init__(self):
         self.cachefib = {}
         self.cclimb = {0:0, 1:1, 2:2 }
+    
+    def houseRob(self, arr: List[int])->int:
+        if len(arr) == 0:
+            return 0
+        if len(arr) == 1:
+            return arr[0]
+        dp = [0] * len(arr)
+        dp[0], dp[1] = arr[0], max(arr[0],arr[1])
+        for i in range(2, len(arr)):
+            dp[i] = max(dp[i-1], dp[i-2] + arr[i])
+        return dp[-1]
+        
 
     def climbStairsBU(self, n:int)->int:
         if n <= 2:
@@ -30,7 +43,65 @@ class Solution:
         self.cachefib[n] = res
         return res
 
-
+class TestHouseRob(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+    
+    def test_house_rob_empty_array(self):
+        self.assertEqual(self.solution.houseRob([]), 0)
+    
+    def test_house_rob_single_house(self):
+        self.assertEqual(self.solution.houseRob([5]), 5)
+        self.assertEqual(self.solution.houseRob([100]), 100)
+    
+    def test_house_rob_two_houses(self):
+        self.assertEqual(self.solution.houseRob([1, 2]), 2)
+        self.assertEqual(self.solution.houseRob([5, 1]), 5)
+        self.assertEqual(self.solution.houseRob([2, 7]), 7)
+    
+    def test_house_rob_small_arrays(self):
+        self.assertEqual(self.solution.houseRob([1, 2, 3]), 4)
+        self.assertEqual(self.solution.houseRob([2, 7, 9, 3]), 11)
+        self.assertEqual(self.solution.houseRob([5, 3, 4, 11, 2]), 16)
+    
+    def test_house_rob_classic_example(self):
+        self.assertEqual(self.solution.houseRob([2, 7, 9, 3, 1]), 12)
+    
+    def test_house_rob_alternating_pattern(self):
+        self.assertEqual(self.solution.houseRob([1, 3, 1, 3, 1]), 6)
+    
+    def test_house_rob_increasing_values(self):
+        self.assertEqual(self.solution.houseRob([1, 2, 3, 4, 5]), 9)
+    
+    def test_house_rob_decreasing_values(self):
+        self.assertEqual(self.solution.houseRob([5, 4, 3, 2, 1]), 9)
+    
+    def test_house_rob_all_same_values(self):
+        self.assertEqual(self.solution.houseRob([5, 5, 5, 5, 5]), 15)
+        self.assertEqual(self.solution.houseRob([3, 3, 3, 3]), 6)
+    
+    def test_house_rob_large_value_at_start(self):
+        self.assertEqual(self.solution.houseRob([10, 1, 1, 1, 1]), 12)
+    
+    def test_house_rob_large_value_at_end(self):
+        self.assertEqual(self.solution.houseRob([1, 1, 1, 1, 10]), 12)
+    
+    def test_house_rob_large_value_in_middle(self):
+        self.assertEqual(self.solution.houseRob([1, 1, 10, 1, 1]), 12)
+    
+    def test_house_rob_with_zeros(self):
+        self.assertEqual(self.solution.houseRob([0, 0, 0, 0]), 0)
+        self.assertEqual(self.solution.houseRob([5, 0, 0, 5]), 10)
+    
+    def test_house_rob_leetcode_example_1(self):
+        self.assertEqual(self.solution.houseRob([1, 2, 3, 1]), 4)
+    
+    def test_house_rob_leetcode_example_2(self):
+        self.assertEqual(self.solution.houseRob([2, 1, 1, 2]), 4)
+    
+    def test_house_rob_longer_array(self):
+        self.assertEqual(self.solution.houseRob([5, 3, 4, 11, 2, 8, 6, 1]), 25)
+        self.assertEqual(self.solution.houseRob([9, 1, 1, 9, 1, 1, 9]), 27)
 
 class TestFibonacci(unittest.TestCase):
     def setUp(self):
