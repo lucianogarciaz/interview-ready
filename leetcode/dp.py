@@ -5,7 +5,35 @@ class Solution:
     def __init__(self):
         self.cachefib = {}
         self.cclimb = {0:0, 1:1, 2:2 }
-    
+    # amount = 4 [1,2,3,5] = 5
+    def coinChange(self, arr:List[int], amount:int)->int:
+        dp = [float('inf')]*(amount+1)
+        dp[0] = 0
+        arr.sort()
+        for i in range(1, amount+1):
+            for c in arr:
+                if c>i:
+                    break
+                dp[i] = min(dp[i], 1+dp[i-c])
+        return dp[amount] if dp[amount]!=float('inf') else -1
+
+    def coinChangeTopDown(self, arr:List[int], amount:int)->int:
+        memo = {}
+        def backtrack(rem:int):
+            if rem in memo:
+                return memo[rem]
+            if rem == 0:
+                return rem
+            if rem < 0:
+                return float('inf')
+            best = float('inf')
+            for c in arr:
+                best = min(best, 1 + backtrack(rem-c))
+            memo[rem] = best
+            return best
+        ans = backtrack(amount)
+        return ans if ans!=float('inf') else -1 
+
     def houseRob(self, arr: List[int])->int:
         if len(arr) == 0:
             return 0
@@ -42,6 +70,67 @@ class Solution:
         res = self.fib(n-1) + self.fib(n-2)
         self.cachefib[n] = res
         return res
+
+class TestCoinChange(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+    
+    def test_coin_change_zero_amount(self):
+        self.assertEqual(self.solution.coinChange([1, 2, 5], 0), 0)
+    
+    def test_coin_change_impossible(self):
+        self.assertEqual(self.solution.coinChange([2], 3), -1)
+        self.assertEqual(self.solution.coinChange([5, 10], 3), -1)
+    
+    def test_coin_change_single_coin_exact(self):
+        self.assertEqual(self.solution.coinChange([1], 1), 1)
+        self.assertEqual(self.solution.coinChange([5], 5), 1)
+        self.assertEqual(self.solution.coinChange([10], 10), 1)
+    
+    def test_coin_change_single_coin_multiple(self):
+        self.assertEqual(self.solution.coinChange([1], 5), 5)
+        self.assertEqual(self.solution.coinChange([2], 6), 3)
+    
+    def test_coin_change_leetcode_example_1(self):
+        self.assertEqual(self.solution.coinChange([1, 2, 5], 11), 3)
+    
+    def test_coin_change_leetcode_example_2(self):
+        self.assertEqual(self.solution.coinChange([2], 3), -1)
+    
+    def test_coin_change_leetcode_example_3(self):
+        self.assertEqual(self.solution.coinChange([1], 0), 0)
+    
+    def test_coin_change_small_amounts(self):
+        self.assertEqual(self.solution.coinChange([1, 2, 5], 4), 2)
+        self.assertEqual(self.solution.coinChange([1, 3, 4], 6), 2)
+        self.assertEqual(self.solution.coinChange([1, 5, 10], 12), 3)
+    
+    def test_coin_change_greedy_fails(self):
+        self.assertEqual(self.solution.coinChange([1, 3, 4], 6), 2)
+        self.assertEqual(self.solution.coinChange([1, 5, 6, 9], 11), 2)
+    
+    def test_coin_change_multiple_options(self):
+        self.assertEqual(self.solution.coinChange([1, 2, 5], 7), 2)
+        self.assertEqual(self.solution.coinChange([1, 2, 5], 8), 3)
+        self.assertEqual(self.solution.coinChange([1, 2, 5], 10), 2)
+    
+    def test_coin_change_large_coins_only(self):
+        self.assertEqual(self.solution.coinChange([5, 10, 25], 30), 2)
+        self.assertEqual(self.solution.coinChange([5, 10, 25], 40), 3)
+    
+    def test_coin_change_all_ones(self):
+        self.assertEqual(self.solution.coinChange([1], 10), 10)
+    
+    def test_coin_change_optimal_selection(self):
+        self.assertEqual(self.solution.coinChange([1, 5, 6, 8], 11), 2)
+        self.assertEqual(self.solution.coinChange([2, 5, 10, 1], 27), 4)
+    
+    def test_coin_change_empty_coins(self):
+        self.assertEqual(self.solution.coinChange([], 5), -1)
+    
+    def test_coin_change_medium_amount(self):
+        self.assertEqual(self.solution.coinChange([1, 5, 10, 25], 63), 6)
+        self.assertEqual(self.solution.coinChange([1, 2, 5, 10], 18), 4)
 
 class TestHouseRob(unittest.TestCase):
     def setUp(self):
