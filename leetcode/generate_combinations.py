@@ -3,10 +3,28 @@ from typing import List
 
 
 class Solution:
+    def subset_with_dup(self, arr:List[int])->List[List[int]]:
+        res:List[List[int]] = []
+        path:List[int] = []
+        arr.sort()
+        # [1,2,2,3]
+        # [1] [1,2] [1,3] [2,2] [2,3]
+        def backtrack(index:int)->None:
+            res.append(path.copy())
+            for i in range(index,len(arr)):
+                if i>index and arr[i]==arr[i-1]:
+                    continue
+                path.append(arr[i])
+                backtrack(i+1)
+                path.pop()
+        
+        backtrack(0)
+        return res
+
     def generateCombinations(self, arr:List[int], k:int)->List[List[int]]:
         res:List[List[int]] = []
         path:List[int] = []
-        def backtrack(index:int):
+        def backtrack(index:int)->None:
             if len(path)==k:
                 res.append(path.copy())
                 return
@@ -18,6 +36,82 @@ class Solution:
             
         backtrack(0)
         return res
+
+
+class TestSubsetWithDup(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+    
+    def test_basic_case_with_duplicates(self):
+        result = self.solution.subset_with_dup([1, 2, 2])
+        expected = [[], [1], [1, 2], [1, 2, 2], [2], [2, 2]]
+        self.assertEqual(len(result), len(expected))
+        for subset in expected:
+            self.assertIn(subset, result)
+    
+    def test_no_duplicates_in_input(self):
+        result = self.solution.subset_with_dup([1, 2, 3])
+        expected = [[], [1], [1, 2], [1, 2, 3], [1, 3], [2], [2, 3], [3]]
+        self.assertEqual(len(result), len(expected))
+        for subset in expected:
+            self.assertIn(subset, result)
+    
+    def test_all_same_elements(self):
+        result = self.solution.subset_with_dup([1, 1, 1])
+        expected = [[], [1], [1, 1], [1, 1, 1]]
+        self.assertEqual(len(result), len(expected))
+        for subset in expected:
+            self.assertIn(subset, result)
+    
+    def test_two_duplicates(self):
+        result = self.solution.subset_with_dup([4, 4, 4, 1, 4])
+        # Should handle duplicates properly
+        self.assertGreater(len(result), 0)
+        # No duplicate subsets
+        result_tuples = [tuple(subset) for subset in result]
+        self.assertEqual(len(result), len(set(result_tuples)))
+    
+    def test_empty_array(self):
+        result = self.solution.subset_with_dup([])
+        expected = [[]]
+        self.assertEqual(result, expected)
+    
+    def test_single_element(self):
+        result = self.solution.subset_with_dup([1])
+        expected = [[], [1]]
+        self.assertEqual(sorted(result), sorted(expected))
+    
+    def test_multiple_pairs_of_duplicates(self):
+        result = self.solution.subset_with_dup([1, 2, 2, 3, 3])
+        # Check no duplicate subsets exist
+        result_tuples = [tuple(subset) for subset in result]
+        self.assertEqual(len(result), len(set(result_tuples)))
+        # Check some key subsets exist
+        self.assertIn([1, 2, 2], result)
+        self.assertIn([1, 3, 3], result)
+        self.assertIn([2, 2, 3, 3], result)
+    
+    def test_no_duplicate_subsets_in_result(self):
+        result = self.solution.subset_with_dup([1, 2, 2, 3])
+        result_tuples = [tuple(subset) for subset in result]
+        self.assertEqual(len(result), len(set(result_tuples)), 
+                        "Result contains duplicate subsets")
+    
+    def test_sorting_preserved(self):
+        result = self.solution.subset_with_dup([3, 1, 2, 2])
+        # All subsets should be in sorted order (since arr.sort() is called)
+        for subset in result:
+            self.assertEqual(subset, sorted(subset))
+    
+    def test_larger_array_with_dups(self):
+        result = self.solution.subset_with_dup([1, 2, 2, 3])
+        expected = [
+            [], [1], [1, 2], [1, 2, 2], [1, 2, 2, 3], [1, 2, 3], 
+            [1, 3], [2], [2, 2], [2, 2, 3], [2, 3], [3]
+        ]
+        self.assertEqual(len(result), len(expected))
+        for subset in expected:
+            self.assertIn(subset, result)
 
 class TestGenerateCombinations(unittest.TestCase):
     def setUp(self):
