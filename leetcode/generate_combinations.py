@@ -3,6 +3,29 @@ from typing import List
 
 
 class Solution:
+    def permute_unique(self, arr:List[int])->List[List[int]]:
+        res: List[List[int]] = []
+        path:List[int] = []
+        visited:List[bool]=[False]*len(arr)
+        arr.sort()
+
+        def backtrack():
+            if len(path)==len(arr):
+                res.append(path.copy())
+                return
+            for i in range(len(arr)):
+                if visited[i]:
+                    continue
+                if i>0 and arr[i] == arr[i-1] and not visited[i-1]:
+                    continue
+                visited[i] = True
+                path.append(arr[i])
+                backtrack()
+                path.pop()
+                visited[i] = False
+
+        backtrack()
+        return res
     def combination_sum(self, arr:List[int], target:int)->List[List[int]]:
         res:List[List[int]]=[]
         path:List[int]=[]
@@ -78,6 +101,105 @@ class Solution:
         backtrack(0)
         return res
 
+
+class TestPermuteUnique(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+    
+    def test_basic_case_with_duplicates(self):
+        result = self.solution.permute_unique([1, 1, 2])
+        expected = [[1, 1, 2], [1, 2, 1], [2, 1, 1]]
+        self.assertEqual(len(result), len(expected))
+        for perm in expected:
+            self.assertIn(perm, result)
+    
+    def test_all_same_elements(self):
+        result = self.solution.permute_unique([1, 1, 1])
+        expected = [[1, 1, 1]]
+        self.assertEqual(result, expected)
+    
+    def test_no_duplicates(self):
+        result = self.solution.permute_unique([1, 2, 3])
+        expected = [
+            [1, 2, 3], [1, 3, 2], [2, 1, 3],
+            [2, 3, 1], [3, 1, 2], [3, 2, 1]
+        ]
+        self.assertEqual(len(result), 6)
+        for perm in expected:
+            self.assertIn(perm, result)
+    
+    def test_two_pairs_of_duplicates(self):
+        result = self.solution.permute_unique([1, 1, 2, 2])
+        expected = [
+            [1, 1, 2, 2], [1, 2, 1, 2], [1, 2, 2, 1],
+            [2, 1, 1, 2], [2, 1, 2, 1], [2, 2, 1, 1]
+        ]
+        self.assertEqual(len(result), len(expected))
+        for perm in expected:
+            self.assertIn(perm, result)
+    
+    def test_single_element(self):
+        result = self.solution.permute_unique([1])
+        expected = [[1]]
+        self.assertEqual(result, expected)
+    
+    def test_two_duplicates(self):
+        result = self.solution.permute_unique([1, 1])
+        expected = [[1, 1]]
+        self.assertEqual(result, expected)
+    
+    def test_no_duplicate_permutations(self):
+        result = self.solution.permute_unique([1, 1, 2, 2])
+        result_tuples = [tuple(perm) for perm in result]
+        self.assertEqual(len(result), len(set(result_tuples)))
+    
+    def test_correct_permutation_count_with_duplicates(self):
+        from math import factorial
+        result = self.solution.permute_unique([1, 1, 2])
+        # For [1, 1, 2]: 3! / 2! = 3 unique permutations
+        expected_count = factorial(3) // factorial(2)
+        self.assertEqual(len(result), expected_count)
+    
+    def test_all_permutations_have_correct_length(self):
+        arr = [1, 1, 2, 3]
+        result = self.solution.permute_unique(arr)
+        for perm in result:
+            self.assertEqual(len(perm), len(arr))
+    
+    def test_all_permutations_contain_same_elements(self):
+        arr = [1, 1, 2, 3]
+        result = self.solution.permute_unique(arr)
+        sorted_arr = sorted(arr)
+        for perm in result:
+            self.assertEqual(sorted(perm), sorted_arr)
+    
+    def test_larger_array_with_duplicates(self):
+        result = self.solution.permute_unique([1, 2, 1])
+        expected = [[1, 1, 2], [1, 2, 1], [2, 1, 1]]
+        self.assertEqual(len(result), len(expected))
+        for perm in expected:
+            self.assertIn(perm, result)
+    
+    def test_multiple_identical_elements(self):
+        result = self.solution.permute_unique([2, 2, 2, 2])
+        expected = [[2, 2, 2, 2]]
+        self.assertEqual(result, expected)
+    
+    def test_three_different_duplicates(self):
+        result = self.solution.permute_unique([1, 1, 2, 2, 3, 3])
+        # No duplicate permutations
+        result_tuples = [tuple(perm) for perm in result]
+        self.assertEqual(len(result), len(set(result_tuples)))
+        # Each permutation has correct elements
+        for perm in result:
+            self.assertEqual(sorted(perm), [1, 1, 2, 2, 3, 3])
+    
+    def test_negative_numbers_with_duplicates(self):
+        result = self.solution.permute_unique([-1, -1, 0])
+        expected = [[-1, -1, 0], [-1, 0, -1], [0, -1, -1]]
+        self.assertEqual(len(result), len(expected))
+        for perm in expected:
+            self.assertIn(perm, result)
 
 class TestCombinationSumII(unittest.TestCase):
     def setUp(self):
