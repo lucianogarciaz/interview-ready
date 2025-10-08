@@ -3,6 +3,47 @@ from typing import List
 
 
 class Solution:
+    def combination_sum(self, arr:List[int], target:int)->List[List[int]]:
+        res:List[List[int]]=[]
+        path:List[int]=[]
+        arr.sort()
+        def backtrack(index:int, total:int):
+            if total == target:
+                res.append(path.copy())
+                return
+            if total > target:
+                return
+            
+            for i in range(index, len(arr)):
+                path.append(arr[i])
+                backtrack(i, total + arr[i])
+                path.pop()
+
+        
+        backtrack(0,0)
+        return res
+
+    def combination_sum_ii(self, arr:List[int], target:int)->List[List[int]]:
+        res:List[List[int]] = []
+        path:List[List[int]] = []
+        arr.sort()
+
+        def backtrack(index:int, total:int):
+            if total == target:
+                res.append(path.copy())
+                return
+            if total > target:
+                return
+            for i in range(index, len(arr)):
+                if i>index and arr[i]==arr[i-1]:
+                    continue
+                path.append(arr[i])
+                backtrack(i+1, arr[i]+total)
+                path.pop()
+
+        backtrack(0,0)
+        return res
+    
     def subset_with_dup(self, arr:List[int])->List[List[int]]:
         res:List[List[int]] = []
         path:List[int] = []
@@ -37,6 +78,185 @@ class Solution:
         backtrack(0)
         return res
 
+
+class TestCombinationSumII(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+    
+    def test_basic_case(self):
+        result = self.solution.combination_sum_ii([10, 1, 2, 7, 6, 1, 5], 8)
+        expected = [[1, 1, 6], [1, 2, 5], [1, 7], [2, 6]]
+        self.assertEqual(len(result), len(expected))
+        for combo in expected:
+            self.assertIn(combo, result)
+    
+    def test_with_duplicates(self):
+        result = self.solution.combination_sum_ii([2, 5, 2, 1, 2], 5)
+        expected = [[1, 2, 2], [5]]
+        self.assertEqual(len(result), len(expected))
+        for combo in expected:
+            self.assertIn(combo, result)
+    
+    def test_no_solution(self):
+        result = self.solution.combination_sum_ii([2, 3, 5], 1)
+        expected = []
+        self.assertEqual(result, expected)
+    
+    def test_single_element_matches_target(self):
+        result = self.solution.combination_sum_ii([1, 2, 3], 3)
+        expected = [[1,2],[3]]
+        self.assertEqual(result, expected)
+    
+    def test_all_same_numbers(self):
+        result = self.solution.combination_sum_ii([1, 1, 1, 1], 2)
+        expected = [[1, 1]]
+        self.assertEqual(result, expected)
+    
+    def test_multiple_duplicates(self):
+        result = self.solution.combination_sum_ii([1, 1, 1, 1, 1], 3)
+        expected = [[1, 1, 1]]
+        self.assertEqual(result, expected)
+    
+    def test_no_duplicate_combinations(self):
+        result = self.solution.combination_sum_ii([10, 1, 2, 7, 6, 1, 5], 8)
+        result_tuples = [tuple(combo) for combo in result]
+        self.assertEqual(len(result), len(set(result_tuples)))
+    
+    def test_all_combinations_sum_to_target(self):
+        result = self.solution.combination_sum_ii([10, 1, 2, 7, 6, 1, 5], 8)
+        for combo in result:
+            self.assertEqual(sum(combo), 8)
+    
+    def test_elements_in_sorted_order(self):
+        result = self.solution.combination_sum_ii([10, 1, 2, 7, 6, 1, 5], 8)
+        for combo in result:
+            self.assertEqual(combo, sorted(combo))
+    
+    def test_each_element_used_once(self):
+        result = self.solution.combination_sum_ii([1, 2], 3)
+        expected = [[1, 2]]
+        self.assertEqual(result, expected)
+        # Should NOT have [1, 1] since only one '1' is available
+        self.assertNotIn([1, 1], result)
+    
+    def test_empty_array(self):
+        result = self.solution.combination_sum_ii([], 5)
+        expected = []
+        self.assertEqual(result, expected)
+    
+    def test_target_zero(self):
+        result = self.solution.combination_sum_ii([1, 2, 3], 0)
+        expected = [[]]
+        self.assertEqual(result, expected)
+    
+    def test_larger_array_with_duplicates(self):
+        result = self.solution.combination_sum_ii([1, 1, 2, 2, 3], 5)
+        expected = [[1, 1, 3], [1, 2, 2], [2, 3]]
+        self.assertEqual(len(result), len(expected))
+        for combo in expected:
+            self.assertIn(combo, result)
+    
+    def test_uses_all_elements(self):
+        result = self.solution.combination_sum_ii([1, 2, 3], 6)
+        expected = [[1, 2, 3]]
+        self.assertEqual(result, expected)
+    
+    def test_many_duplicates_different_sums(self):
+        result = self.solution.combination_sum_ii([1, 1, 1, 2, 2], 4)
+        expected = [[1, 1, 2], [2, 2]]
+        self.assertEqual(len(result), len(expected))
+        for combo in expected:
+            self.assertIn(combo, result)
+
+class TestCombinationSum(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+    
+    def test_basic_case(self):
+        result = self.solution.combination_sum([2, 3, 6, 7], 7)
+        expected = [[2, 2, 3], [7]]
+        self.assertEqual(len(result), len(expected))
+        for combo in expected:
+            self.assertIn(combo, result)
+    
+    def test_repeated_elements(self):
+        result = self.solution.combination_sum([2, 3, 5], 8)
+        expected = [[2, 2, 2, 2], [2, 3, 3], [3, 5]]
+        self.assertEqual(len(result), len(expected))
+        for combo in expected:
+            self.assertIn(combo, result)
+    
+    def test_single_element_repeated(self):
+        result = self.solution.combination_sum([2], 8)
+        expected = [[2, 2, 2, 2]]
+        self.assertEqual(result, expected)
+    
+    def test_target_equals_element(self):
+        result = self.solution.combination_sum([2, 3, 5], 5)
+        expected = [[2, 3], [5]]
+        self.assertEqual(sorted(result), sorted(expected))
+    
+    def test_no_solution(self):
+        result = self.solution.combination_sum([2, 4, 6], 5)
+        expected = []
+        self.assertEqual(result, expected)
+    
+    def test_target_1(self):
+        result = self.solution.combination_sum([1], 3)
+        expected = [[1, 1, 1]]
+        self.assertEqual(result, expected)
+    
+    def test_larger_numbers(self):
+        result = self.solution.combination_sum([10, 20, 30], 50)
+        expected = [[10,10,10,10,10],[10, 10, 10, 20], [10, 10, 30], [10, 20, 20], [20, 30]]
+        self.assertEqual(len(result), len(expected))
+        for combo in expected:
+            self.assertIn(combo, result)
+    
+    def test_all_combinations_sum_to_target(self):
+        result = self.solution.combination_sum([2, 3, 5], 8)
+        for combo in result:
+            self.assertEqual(sum(combo), 8)
+    
+    def test_no_duplicates_in_result(self):
+        result = self.solution.combination_sum([2, 3, 6, 7], 7)
+        result_tuples = [tuple(combo) for combo in result]
+        self.assertEqual(len(result), len(set(result_tuples)))
+    
+    def test_elements_in_sorted_order(self):
+        result = self.solution.combination_sum([3, 2, 7, 6], 7)
+        for combo in result:
+            self.assertEqual(combo, sorted(combo))
+    
+    def test_single_element_cant_reach_target(self):
+        result = self.solution.combination_sum([3], 5)
+        expected = []
+        self.assertEqual(result, expected)
+    
+    def test_multiple_ways_to_reach_target(self):
+        result = self.solution.combination_sum([1, 2], 4)
+        expected = [[1, 1, 1, 1], [1, 1, 2], [2, 2]]
+        self.assertEqual(len(result), len(expected))
+        for combo in expected:
+            self.assertIn(combo, result)
+    
+    def test_target_zero(self):
+        result = self.solution.combination_sum([1, 2, 3], 0)
+        expected = [[]]
+        self.assertEqual(result, expected)
+    
+    def test_large_target_small_numbers(self):
+        result = self.solution.combination_sum([2, 3], 12)
+        self.assertGreater(len(result), 0)
+        for combo in result:
+            self.assertEqual(sum(combo), 12)
+    
+    def test_all_elements_use_only_from_candidates(self):
+        candidates = [2, 3, 6, 7]
+        result = self.solution.combination_sum(candidates, 7)
+        for combo in result:
+            for num in combo:
+                self.assertIn(num, candidates)
 
 class TestSubsetWithDup(unittest.TestCase):
     def setUp(self):
