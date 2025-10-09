@@ -5,7 +5,16 @@ class Solution:
     def __init__(self):
         self.cachefib = {}
         self.cclimb = {0:0, 1:1, 2:2 }
-    # amount = 4 [1,2,3,5] = 5
+
+    def coinChange2(self, arr:List[int], amount:int)->int:
+        dp = [0] * (amount + 1)
+        dp[0] = 1
+        arr.sort()
+        for c in arr:
+            for i in range(c, amount + 1):
+                dp[i] += dp[i-c]
+        return dp[amount]
+
     def coinChange(self, arr:List[int], amount:int)->int:
         dp = [float('inf')]*(amount+1)
         dp[0] = 0
@@ -70,7 +79,58 @@ class Solution:
         res = self.fib(n-1) + self.fib(n-2)
         self.cachefib[n] = res
         return res
-
+class TestCoinChange2(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+    
+    def test_coin_change2_zero_amount(self):
+        self.assertEqual(self.solution.coinChange2([1, 2, 5], 0), 1)
+    
+    def test_coin_change2_single_coin_exact(self):
+        self.assertEqual(self.solution.coinChange2([1], 1), 1)
+        self.assertEqual(self.solution.coinChange2([5], 5), 1)
+        self.assertEqual(self.solution.coinChange2([10], 10), 1)
+    
+    def test_coin_change2_single_coin_multiple_ways(self):
+        self.assertEqual(self.solution.coinChange2([1], 5), 1)
+        self.assertEqual(self.solution.coinChange2([2], 6), 1)
+    
+    def test_coin_change2_impossible(self):
+        self.assertEqual(self.solution.coinChange2([2], 3), 0)
+        self.assertEqual(self.solution.coinChange2([5, 10], 3), 0)
+    
+    def test_coin_change2_leetcode_example_1(self):
+        self.assertEqual(self.solution.coinChange2([1, 2, 5], 5), 4)
+    
+    def test_coin_change2_leetcode_example_2(self):
+        self.assertEqual(self.solution.coinChange2([2], 3), 0)
+    
+    def test_coin_change2_leetcode_example_3(self):
+        self.assertEqual(self.solution.coinChange2([10], 10), 1)
+    
+    def test_coin_change2_small_amounts(self):
+        self.assertEqual(self.solution.coinChange2([1, 2, 5], 4), 3)
+        self.assertEqual(self.solution.coinChange2([1, 2, 5], 3), 2)
+    
+    def test_coin_change2_multiple_combinations(self):
+        self.assertEqual(self.solution.coinChange2([1, 2, 3], 4), 4)
+        self.assertEqual(self.solution.coinChange2([1, 2, 5], 7), 6)
+    
+    def test_coin_change2_large_amount(self):
+        self.assertEqual(self.solution.coinChange2([1, 2, 5], 10), 10)
+        self.assertEqual(self.solution.coinChange2([1, 2, 5], 11), 11)
+    
+    def test_coin_change2_empty_coins(self):
+        self.assertEqual(self.solution.coinChange2([], 5), 0)
+        self.assertEqual(self.solution.coinChange2([], 0), 1)
+        
+    def test_coin_change2_all_ones(self):
+        self.assertEqual(self.solution.coinChange2([1], 10), 1)
+        self.assertEqual(self.solution.coinChange2([1], 100), 1)
+        
+    def test_coin_change2_edge_cases(self):
+        self.assertEqual(self.solution.coinChange2([1, 5, 10, 25], 25), 13)
+        self.assertEqual(self.solution.coinChange2([3, 5], 9), 1)
 class TestCoinChange(unittest.TestCase):
     def setUp(self):
         self.solution = Solution()
