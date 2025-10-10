@@ -5,8 +5,22 @@ class Solution:
     def __init__(self):
         self.cachefib = {}
         self.cclimb = {0:0, 1:1, 2:2 }
-
+    #   5     [4 3 2]   1 = 0, 2=1, 3=1,4=2,5=
+    #   5  -  4 - x
+    #      -  3 - 2
+    #      - 2 - 3
     def coinChange2(self, arr:List[int], amount:int)->int:
+        count = {0:1}
+        for c in arr:
+            for i in range(1,amount +1):
+                subproblem = i - c
+                if i - c < 0:
+                    continue
+                count[i] = count.get(i,0) + count.get(subproblem,0)
+        return count.get(amount,0)
+
+
+    def coinChange22(self, arr:List[int], amount:int)->int:
         dp = [0] * (amount + 1)
         dp[0] = 1
         arr.sort()
