@@ -5,10 +5,17 @@ class Solution:
     def __init__(self):
         self.cachefib = {}
         self.cclimb = {0:0, 1:1, 2:2 }
-    #   5     [4 3 2]   1 = 0, 2=1, 3=1,4=2,5=
-    #   5  -  4 - x
-    #      -  3 - 2
-    #      - 2 - 3
+    def gridPath(self, n:int, m:int)->int:
+        memo = {}
+        for i in range(1, n+1):
+            memo[i,1] = 1
+        for j in range(1, m+1):
+            memo[1,j] = 1
+        for i in range(2, n+1):
+            for j in range(2,m+1):
+                memo[i,j] = memo[i-1,j] + memo[i,j-1]
+        return memo[n,m]
+
     def coinChange2(self, arr:List[int], amount:int)->int:
         count = {0:1}
         for c in arr:
@@ -93,6 +100,63 @@ class Solution:
         res = self.fib(n-1) + self.fib(n-2)
         self.cachefib[n] = res
         return res
+
+class TestGridPath(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+    
+    def test_grid_path_1x1(self):
+        self.assertEqual(self.solution.gridPath(1, 1), 1)
+    
+    def test_grid_path_1xn(self):
+        self.assertEqual(self.solution.gridPath(1, 5), 1)
+        self.assertEqual(self.solution.gridPath(1, 10), 1)
+    
+    def test_grid_path_nx1(self):
+        self.assertEqual(self.solution.gridPath(5, 1), 1)
+        self.assertEqual(self.solution.gridPath(10, 1), 1)
+    
+    def test_grid_path_2x2(self):
+        self.assertEqual(self.solution.gridPath(2, 2), 2)
+    
+    def test_grid_path_small_grids(self):
+        self.assertEqual(self.solution.gridPath(2, 3), 3)
+        self.assertEqual(self.solution.gridPath(3, 2), 3)
+        self.assertEqual(self.solution.gridPath(3, 3), 6)
+    
+    def test_grid_path_rectangle(self):
+        self.assertEqual(self.solution.gridPath(2, 4), 4)
+        self.assertEqual(self.solution.gridPath(4, 2), 4)
+        self.assertEqual(self.solution.gridPath(3, 4), 10)
+        self.assertEqual(self.solution.gridPath(4, 3), 10)
+    
+    def test_grid_path_medium_grids(self):
+        self.assertEqual(self.solution.gridPath(4, 4), 20)
+        self.assertEqual(self.solution.gridPath(5, 5), 70)
+    
+    def test_grid_path_symmetric(self):
+        for n in range(1, 6):
+            for m in range(1, 6):
+                with self.subTest(n=n, m=m):
+                    self.assertEqual(
+                        self.solution.gridPath(n, m),
+                        self.solution.gridPath(m, n),
+                        f"Grid path should be symmetric: ({n},{m}) != ({m},{n})"
+                    )
+    
+    def test_grid_path_larger_grids(self):
+        self.assertEqual(self.solution.gridPath(7, 3), 28)
+        self.assertEqual(self.solution.gridPath(6, 6), 252)
+    
+    def test_grid_path_asymmetric(self):
+        self.assertEqual(self.solution.gridPath(10, 2), 10)
+        self.assertEqual(self.solution.gridPath(2, 10), 10)
+    
+    def test_grid_path_pattern_check(self):
+        self.assertEqual(self.solution.gridPath(3, 5), 15)
+        self.assertEqual(self.solution.gridPath(4, 5), 35)
+        self.assertEqual(self.solution.gridPath(5, 6), 126)
+
 class TestCoinChange2(unittest.TestCase):
     def setUp(self):
         self.solution = Solution()
