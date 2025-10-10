@@ -5,6 +5,20 @@ class Solution:
     def __init__(self):
         self.cachefib = {}
         self.cclimb = {0:0, 1:1, 2:2 }
+    
+    def longestCommonSubsequence(self, arr: List[int], arrb:List[int])->int:
+        dp:List[List[int]] = [[0] * (len(arrb)+1) for _ in range(len(arr)+1)]
+        for i in range(1, len(arr)+1):
+            for j in range(1, len(arrb)+1):
+                if arr[i-1] == arrb[j-1]:
+                    dp[i][j] = dp[i-1][j-1] + 1
+                else:
+                    dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+                    
+        
+        return dp[len(arr)][len(arrb)]
+
+    
     def gridPath(self, n:int, m:int)->int:
         memo = {}
         for i in range(1, n+1):
@@ -100,6 +114,73 @@ class Solution:
         res = self.fib(n-1) + self.fib(n-2)
         self.cachefib[n] = res
         return res
+
+class TestLongestCommonSubsequence(unittest.TestCase):
+    def setUp(self):
+        self.solution = Solution()
+    
+    def test_lcs_empty_strings(self):
+        self.assertEqual(self.solution.longestCommonSubsequence("", ""), 0)
+        self.assertEqual(self.solution.longestCommonSubsequence("abc", ""), 0)
+        self.assertEqual(self.solution.longestCommonSubsequence("", "abc"), 0)
+    
+    def test_lcs_identical_strings(self):
+        self.assertEqual(self.solution.longestCommonSubsequence("a", "a"), 1)
+        self.assertEqual(self.solution.longestCommonSubsequence("abc", "abc"), 3)
+        self.assertEqual(self.solution.longestCommonSubsequence("hello", "hello"), 5)
+    
+    def test_lcs_no_common_subsequence(self):
+        self.assertEqual(self.solution.longestCommonSubsequence("abc", "def"), 0)
+        self.assertEqual(self.solution.longestCommonSubsequence("xyz", "123"), 0)
+    
+    def test_lcs_single_character_match(self):
+        self.assertEqual(self.solution.longestCommonSubsequence("a", "bac"), 1)
+        self.assertEqual(self.solution.longestCommonSubsequence("xyz", "x"), 1)
+        self.assertEqual(self.solution.longestCommonSubsequence("abc", "c"), 1)
+    
+    def test_lcs_leetcode_example_1(self):
+        self.assertEqual(self.solution.longestCommonSubsequence("abcde", "ace"), 3)
+    
+    def test_lcs_leetcode_example_2(self):
+        self.assertEqual(self.solution.longestCommonSubsequence("abc", "abc"), 3)
+    
+    def test_lcs_leetcode_example_3(self):
+        self.assertEqual(self.solution.longestCommonSubsequence("abc", "def"), 0)
+    
+
+    def test_lcs_partial_overlap(self):
+        self.assertEqual(self.solution.longestCommonSubsequence("abcdef", "fbdamn"), 2)  # Cambiado de 3 a 2
+        self.assertEqual(self.solution.longestCommonSubsequence("horse", "ros"), 2)
+    
+    def test_lcs_scattered_match(self):
+        self.assertEqual(self.solution.longestCommonSubsequence("abcde", "aec"), 2)
+        self.assertEqual(self.solution.longestCommonSubsequence("programming", "gaming"), 6)
+    
+    def test_lcs_reversed_strings(self):
+        self.assertEqual(self.solution.longestCommonSubsequence("abc", "cba"), 1)
+        self.assertEqual(self.solution.longestCommonSubsequence("abcd", "dcba"), 1)
+    
+    def test_lcs_one_is_subsequence(self):
+        self.assertEqual(self.solution.longestCommonSubsequence("abc", "aabbcc"), 3)
+        self.assertEqual(self.solution.longestCommonSubsequence("ace", "abcde"), 3)
+    
+    def test_lcs_longer_strings(self):
+        self.assertEqual(self.solution.longestCommonSubsequence("intention", "execution"), 5)
+        self.assertEqual(self.solution.longestCommonSubsequence("pneumonoultramicroscopicsilicovolcanoconiosis", "ultramicroscopically"), 18)
+    
+    def test_lcs_repeated_characters(self):
+        self.assertEqual(self.solution.longestCommonSubsequence("aaa", "aa"), 2)
+        self.assertEqual(self.solution.longestCommonSubsequence("aaaa", "aa"), 2)
+        self.assertEqual(self.solution.longestCommonSubsequence("aabbcc", "abc"), 3)
+    
+    def test_lcs_case_sensitive(self):
+        self.assertEqual(self.solution.longestCommonSubsequence("ABC", "abc"), 0)
+        self.assertEqual(self.solution.longestCommonSubsequence("AbC", "abc"), 1)
+    
+    def test_lcs_complex_patterns(self):
+        self.assertEqual(self.solution.longestCommonSubsequence("AGGTAB", "GXTXAYB"), 4)
+        self.assertEqual(self.solution.longestCommonSubsequence("ABCDGH", "AEDFHR"), 3)
+
 
 class TestGridPath(unittest.TestCase):
     def setUp(self):
