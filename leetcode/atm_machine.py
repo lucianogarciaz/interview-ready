@@ -8,47 +8,34 @@ import unittest
 class ATM:
     def __init__(self):
         self.balance = {}
-        self.bill = {0: 20, 1:50, 2:100, 3:200, 4:500}
-    
-    def deposit(self, b:List[int])->None:
+        self.bill = {0:20, 1:50, 2:100, 3:200, 4:500}
+    def deposit(self, notes: List[int])->None:
         if not self.balance:
             self.balance = [0] * 5
-        for i, val in enumerate(b):
-            self.balance[i]+=val
-    
-    def withdraw(self, amount: int)->List[int]:
+        for i, val in enumerate(notes):
+            self.balance[i] += val
+    def withdraw(self, amount:int)->List[int]:
         if not self.balance:
             return [-1]
+        
         res:List[int] = [0] * 5
         balance_copy = self.balance.copy()
-        for i in range(4, -1,-1):
-            """
-            amount = 600
-            balance = [0,0,3,1,1]
-            i = 4
-            """
+        
+        for i in range(4, -1, -1):
             bill_note = self.bill[i]
-            if bill_note > amount:
-                continue
-            if amount >= balance_copy[i] * bill_note:
-                amount -= balance_copy[i] * bill_note #500 , remaining: 100
+            if amount >= bill_note * balance_copy[i]:
                 res[i] = balance_copy[i]
+                amount -= bill_note * balance_copy[i]
                 balance_copy[i] = 0
             else:
-                bills_to_use = amount // bill_note
-                amount -= bill_note * bills_to_use
-                res[i] = bills_to_use
-                balance_copy[i] -= bills_to_use
-        
-        if amount != 0:
+                nro_of_bills = amount//bill_note
+                res[i] = nro_of_bills
+                balance_copy[i] -= nro_of_bills
+                amount -= bill_note*nro_of_bills
+        if amount!= 0:
             return [-1]
         self.balance = balance_copy
         return res
-
-
-
-
-
 
 class TestATM(unittest.TestCase):
     
