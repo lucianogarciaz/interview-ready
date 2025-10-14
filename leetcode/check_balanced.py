@@ -1,6 +1,6 @@
 import unittest
 from inorder_traversal import TreeNode
-from typing import Optional
+from typing import Optional, Tuple
 
 #     1
 #   2   3
@@ -16,7 +16,7 @@ class Solution:
         result, _ = self.dfs(tree)
         return result
     
-    def dfs(self, tree: Optional[TreeNode])->tuple[bool, int]:
+    def dfs(self, tree: Optional[TreeNode])->Tuple[bool, int]:
         if not tree:
             return True, 0
 
