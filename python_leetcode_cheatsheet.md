@@ -6,14 +6,15 @@
 3. [Built-in Functions](#built-in-functions)
 4. [String Operations](#string-operations)
 5. [Math Operations](#math-operations)
-6. [Common Patterns](#common-patterns)
-7. [Collections Module](#collections-module)
-8. [Heapq Module](#heapq-module)
-9. [Itertools Module](#itertools-module)
-10. [Sorting](#sorting)
-11. [Binary Search](#binary-search)
-12. [Bit Manipulation](#bit-manipulation)
-13. [Tips & Tricks](#tips--tricks)
+6. [Random Module](#random-module)
+7. [Common Patterns](#common-patterns)
+8. [Collections Module](#collections-module)
+9. [Heapq Module](#heapq-module)
+10. [Itertools Module](#itertools-module)
+11. [Sorting](#sorting)
+12. [Binary Search](#binary-search)
+13. [Bit Manipulation](#bit-manipulation)
+14. [Tips & Tricks](#tips--tricks)
 
 ## Basic Syntax
 
@@ -366,6 +367,88 @@ math.e                  # 2.718281...
 -7 // 2                 # -4 (floor division)
 7 % 2                   # 1 (modulo)
 divmod(7, 2)            # (3, 1)
+```
+
+## Random Module
+
+### Basic Random Operations
+```python
+import random
+
+random.random()                    # Float [0.0, 1.0) -> 0.8444218515250481
+random.uniform(1, 10)              # Float [1, 10] -> 7.892234132
+random.randint(1, 10)              # Int [1, 10] (inclusive) -> 7
+random.randrange(0, 10)            # Int [0, 10) (exclusive end) -> 5
+random.randrange(0, 10, 2)         # Int [0, 10) with step 2 -> 4 (0, 2, 4, 6, 8)
+```
+
+### Random Selection
+```python
+import random
+
+arr = [1, 2, 3, 4, 5]
+
+random.choice(arr)                 # Single random element -> 3
+random.choices(arr, k=3)           # 3 elements with replacement -> [2, 5, 2]
+random.sample(arr, 3)              # 3 unique elements without replacement -> [4, 1, 5]
+
+weights = [1, 2, 3, 4, 5]
+random.choices(arr, weights=weights, k=3)  # Weighted random selection -> [5, 4, 5]
+```
+
+### Shuffling
+```python
+import random
+
+arr = [1, 2, 3, 4, 5]
+random.shuffle(arr)                # Shuffle in-place
+# arr is now -> [3, 5, 1, 4, 2]
+```
+
+### Setting Seed (for reproducibility)
+```python
+import random
+
+random.seed(42)                    # Set seed for reproducibility
+random.random()                    # -> 0.6394267984578837
+random.randint(1, 10)              # -> 1
+
+random.seed(42)                    # Reset same seed
+random.random()                    # -> 0.6394267984578837 (same as before!)
+random.randint(1, 10)              # -> 1 (same as before!)
+```
+
+### Random with Range
+```python
+import random
+
+random.randint(1, 6)               # Dice roll (1-6) -> 4
+random.randint(0, 1)               # Coin flip (0 or 1) -> 0
+random.choice([True, False])       # Boolean -> True
+random.choice(['Heads', 'Tails'])  # Coin flip -> 'Heads'
+
+random.getrandbits(8)              # Random 8-bit integer (0-255) -> 142
+```
+
+### Common Use Cases
+```python
+import random
+
+random_password = ''.join(random.choices('abcdefghijklmnopqrstuvwxyz0123456789', k=8))
+# -> 'j8x3k9m2'
+
+arr = [10, 20, 30, 40, 50]
+random_index = random.randint(0, len(arr) - 1)
+# -> 3
+
+shuffled = random.sample(arr, len(arr))
+# -> [30, 10, 50, 20, 40]
+
+random_subset = random.sample(range(100), 10)
+# -> [72, 15, 43, 88, 9, 56, 31, 67, 2, 94]
+
+random_float_range = random.uniform(0.5, 9.5)
+# -> 6.234891234
 ```
 
 ## Common Patterns
