@@ -69,37 +69,37 @@ x = y = z = 0
 
 ### Lists
 ```python
-arr = []                    # Empty list
-arr = [1, 2, 3]            # With elements
-arr = [0] * 5              # [0, 0, 0, 0, 0]
-arr = list(range(5))       # [0, 1, 2, 3, 4]
+arr = []                    # Empty list - O(1)
+arr = [1, 2, 3]            # With elements - O(n)
+arr = [0] * 5              # [0, 0, 0, 0, 0] - O(n)
+arr = list(range(5))       # [0, 1, 2, 3, 4] - O(n)
 
-arr.append(4)              # Add at end
-arr.insert(0, 0)           # Insert at index
-arr.pop()                  # Remove and return last
-arr.pop(0)                 # Remove and return at index
-arr.remove(value)       
-del arr[2]  # Deletes element at index 2  
-arr.clear()                # Remove all
+arr.append(4)              # Add at end - O(1) amortized
+arr.insert(0, 0)           # Insert at index - O(n)
+arr.pop()                  # Remove and return last - O(1)
+arr.pop(0)                 # Remove and return at index - O(n)
+arr.remove(value)          # O(n)
+del arr[2]                 # Deletes element at index 2 - O(n)
+arr.clear()                # Remove all - O(n)
 
-arr[1:3]                   # Slice [1, 2]
-arr[:2]                    # First 2 elements
-arr[2:]                    # From index 2 to end
-arr[-1]                    # Last element
-arr[-2:]                   # Last 2 elements
-arr[::-1]                  # Reverse
-arr[::2]                   # Every 2nd element
+arr[1:3]                   # Slice [1, 2] - O(k) where k is slice size
+arr[:2]                    # First 2 elements - O(k)
+arr[2:]                    # From index 2 to end - O(k)
+arr[-1]                    # Last element - O(1)
+arr[-2:]                   # Last 2 elements - O(k)
+arr[::-1]                  # Reverse - O(n)
+arr[::2]                   # Every 2nd element - O(n)
 
-arr.sort()                 # Sort in-place
-arr.reverse()              # Reverse in-place
-arr.index(value)           # Find index (raises ValueError if not found)
-arr.count(value)           # Count occurrences
-arr.extend([4, 5])         # Add multiple elements
+arr.sort()                 # Sort in-place - O(n log n)
+arr.reverse()              # Reverse in-place - O(n)
+arr.index(value)           # Find index (raises ValueError if not found) - O(n)
+arr.count(value)           # Count occurrences - O(n)
+arr.extend([4, 5])         # Add multiple elements - O(k) where k is length of extension
 
-len(arr)                   # Length
-min(arr)                   # Minimum
-max(arr)                   # Maximum
-sum(arr)                   # Sum
+len(arr)                   # Length - O(1)
+min(arr)                   # Minimum - O(n)
+max(arr)                   # Maximum - O(n)
+sum(arr)                   # Sum - O(n)
 
 # List comprehension
 squares = [x**2 for x in range(10)]
@@ -109,24 +109,24 @@ matrix = [[0] * n for _ in range(m)]  # m x n matrix
 
 ### Dictionaries
 ```python
-d = {}                              # Empty dict
-d = {'key': 'value'}               # With items
-d = dict()                         # Using constructor
+d = {}                              # Empty dict - O(1)
+d = {'key': 'value'}               # With items - O(n)
+d = dict()                         # Using constructor - O(1)
 
-d['key'] = 'value'                 # Add/update
-value = d.get('key')               # Get (returns None if not found)
-value = d.get('key', 'default')    # Get with default
-value = d.pop('key')               # Remove and return
-value = d.pop('key', 'default')    # Pop with default
-del d['key']                       # Delete key
+d['key'] = 'value'                 # Add/update - O(1) average
+value = d.get('key')               # Get (returns None if not found) - O(1) average
+value = d.get('key', 'default')    # Get with default - O(1) average
+value = d.pop('key')               # Remove and return - O(1) average
+value = d.pop('key', 'default')    # Pop with default - O(1) average
+del d['key']                       # Delete key - O(1) average
 
-'key' in d                         # Check existence
-list(d.keys())                     # All keys
-list(d.values())                   # All values
-list(d.items())                    # All (key, value) pairs
+'key' in d                         # Check existence - O(1) average
+list(d.keys())                     # All keys - O(n)
+list(d.values())                   # All values - O(n)
+list(d.items())                    # All (key, value) pairs - O(n)
 
-d.update({'key2': 'value2'})       # Merge dicts
-d.clear()                          # Remove all
+d.update({'key2': 'value2'})       # Merge dicts - O(k) where k is size of update dict
+d.clear()                          # Remove all - O(n)
 
 # Dict comprehension
 squares = {x: x**2 for x in range(5)}
@@ -134,25 +134,25 @@ squares = {x: x**2 for x in range(5)}
 
 ### Sets
 ```python
-s = set()                  # Empty set
-s = {1, 2, 3}             # With elements
-s = set([1, 2, 3])        # From list
+s = set()                  # Empty set - O(1)
+s = {1, 2, 3}             # With elements - O(len(s))
+s = set([1, 2, 3])        # From list - O(len(list))
 
-s.add(4)                  # Add element
-s.remove(1)               # Remove (raises KeyError if not found)
-s.discard(1)              # Remove (no error if not found)
-s.pop()                   # Remove and return arbitrary element
-s.clear()                 # Remove all
+s.add(4)                  # Add element - O(1) average
+s.remove(1)               # Remove (raises KeyError if not found) - O(1) average
+s.discard(1)              # Remove (no error if not found) - O(1) average
+s.pop()                   # Remove and return arbitrary element - O(1)
+s.clear()                 # Remove all - O(n)
 
-1 in s                    # Check membership
-len(s)                    # Size
+1 in s                    # Check membership - O(1) average
+len(s)                    # Size - O(1)
 
-s1 | s2                   # Union
-s1 & s2                   # Intersection
-s1 - s2                   # Difference
-s1 ^ s2                   # Symmetric difference
-s1.issubset(s2)          # Check if s1 ⊆ s2
-s1.issuperset(s2)        # Check if s1 ⊇ s2
+s1 | s2                   # Union - O(len(s1) + len(s2))
+s1 & s2                   # Intersection - O(min(len(s1), len(s2)))
+s1 - s2                   # Difference - O(len(s1))
+s1 ^ s2                   # Symmetric difference - O(len(s1) + len(s2))
+s1.issubset(s2)          # Check if s1 ⊆ s2 - O(len(s1))
+s1.issuperset(s2)        # Check if s1 ⊇ s2 - O(len(s2))
 
 # Set comprehension
 even_set = {x for x in range(10) if x % 2 == 0}
@@ -160,17 +160,19 @@ even_set = {x for x in range(10) if x % 2 == 0}
 
 ### Tuples
 ```python
-t = ()                    # Empty tuple
-t = (1,)                  # Single element (note the comma)
-t = (1, 2, 3)            # Multiple elements
-t = 1, 2, 3              # Without parentheses
+t = ()                    # Empty tuple - O(1)
+t = (1,)                  # Single element (note the comma) - O(1)
+t = (1, 2, 3)            # Multiple elements - O(n)
+t = 1, 2, 3              # Without parentheses - O(n)
 
-a, b, c = t              # Unpacking
-a, *rest = t             # Extended unpacking
+a, b, c = t              # Unpacking - O(n)
+a, *rest = t             # Extended unpacking - O(n)
 
-t[0]                     # Access by index
-t[1:3]                   # Slicing
-len(t)                   # Length
+t[0]                     # Access by index - O(1)
+t[1:3]                   # Slicing - O(k) where k is slice size
+len(t)                   # Length - O(1)
+t.count(value)           # Count occurrences - O(n)
+t.index(value)           # Find index - O(n)
 ```
 
 ### Strings
@@ -180,30 +182,30 @@ s = 'hello'
 s = """multi
 line"""
 
-s[0]                     # Access by index: 'h'
-s[1:3]                   # Slice: 'el'
-s[::-1]                  # Reverse: 'olleh'
-len(s)                   # Length: 5
+s[0]                     # Access by index: 'h' - O(1)
+s[1:3]                   # Slice: 'el' - O(k) where k is slice size
+s[::-1]                  # Reverse: 'olleh' - O(n)
+len(s)                   # Length: 5 - O(1)
 
-s.lower()                # Convert to lowercase
-s.upper()                # Convert to uppercase
-s.strip()                # Remove whitespace
-s.split()                # Split by whitespace
-s.split(',')             # Split by delimiter
-''.join(['a', 'b'])      # Join: 'ab'
+s.lower()                # Convert to lowercase - O(n)
+s.upper()                # Convert to uppercase - O(n)
+s.strip()                # Remove whitespace - O(n)
+s.split()                # Split by whitespace - O(n)
+s.split(',')             # Split by delimiter - O(n)
+''.join(['a', 'b'])      # Join: 'ab' - O(n) where n is total chars
 
-s.startswith('he')       # True
-s.endswith('lo')         # True
-s.find('ll')             # Index or -1: 2
-s.index('ll')            # Index or ValueError: 2
-s.count('l')             # Count: 2
-s.replace('l', 'L')      # Replace: 'heLLo'
+s.startswith('he')       # True - O(k) where k is length of prefix
+s.endswith('lo')         # True - O(k) where k is length of suffix
+s.find('ll')             # Index or -1: 2 - O(n)
+s.index('ll')            # Index or ValueError: 2 - O(n)
+s.count('l')             # Count: 2 - O(n)
+s.replace('l', 'L')      # Replace: 'heLLo' - O(n)
 
-s.isalpha()              # All alphabetic
-s.isdigit()              # All digits
-s.isalnum()              # All alphanumeric
-s.islower()              # All lowercase
-s.isupper()              # All uppercase
+s.isalpha()              # All alphabetic - O(n)
+s.isdigit()              # All digits - O(n)
+s.isalnum()              # All alphanumeric - O(n)
+s.islower()              # All lowercase - O(n)
+s.isupper()              # All uppercase - O(n)
 
 # String formatting
 name = "Alice"
@@ -215,70 +217,73 @@ f"{name} is {age} years old"
 ```python
 from collections import deque
 
-dq = deque()              # Empty deque
-dq = deque([1, 2, 3])    # From list
+dq = deque()              # Empty deque - O(1)
+dq = deque([1, 2, 3])    # From list - O(n)
 
-dq.append(4)             # Add to right: [1, 2, 3, 4]
-dq.appendleft(0)         # Add to left: [0, 1, 2, 3, 4]
-dq.pop()                 # Remove from right: 4
-dq.popleft()             # Remove from left: 0
-dq.extend([5, 6])        # Extend right
-dq.extendleft([7, 8])    # Extend left
-dq.rotate(1)             # Rotate right
-dq.rotate(-1)            # Rotate left
+dq.append(4)             # Add to right: [1, 2, 3, 4] - O(1)
+dq.appendleft(0)         # Add to left: [0, 1, 2, 3, 4] - O(1)
+dq.pop()                 # Remove from right: 4 - O(1)
+dq.popleft()             # Remove from left: 0 - O(1)
+dq.extend([5, 6])        # Extend right - O(k) where k is length of extension
+dq.extendleft([7, 8])    # Extend left - O(k)
+dq.rotate(1)             # Rotate right - O(k) where k is rotation steps
+dq.rotate(-1)            # Rotate left - O(k)
 
-len(dq)                  # Length
+len(dq)                  # Length - O(1)
+dq[0]                    # Access by index - O(n)
+dq.remove(value)         # Remove first occurrence - O(n)
+dq.count(value)          # Count occurrences - O(n)
 ```
 
 ## Built-in Functions
 
 ### Common Functions
 ```python
-len(obj)                 # Length
-min(arr)                 # Minimum
-max(arr)                 # Maximum
-sum(arr)                 # Sum
-abs(x)                   # Absolute value
-pow(x, y)                # x to power y
-divmod(a, b)            # (a // b, a % b)
+len(obj)                 # Length - O(1)
+min(arr)                 # Minimum - O(n)
+max(arr)                 # Maximum - O(n)
+sum(arr)                 # Sum - O(n)
+abs(x)                   # Absolute value - O(1)
+pow(x, y)                # x to power y - O(log y) for integer exponentiation
+divmod(a, b)            # (a // b, a % b) - O(1)
 
-range(n)                 # 0 to n-1
-range(start, end)        # start to end-1
-range(start, end, step)  # with step
+range(n)                 # 0 to n-1 - O(1) to create, O(n) to iterate
+range(start, end)        # start to end-1 - O(1)
+range(start, end, step)  # with step - O(1)
 
-sorted(arr)              # Return sorted copy
-reversed(arr)            # Return reversed iterator
+sorted(arr)              # Return sorted copy - O(n log n)
+reversed(arr)            # Return reversed iterator - O(1) to create, O(n) to iterate
 
-any([True, False])       # True if any is True
-all([True, True])        # True if all are True
+any([True, False])       # True if any is True - O(n) worst case
+all([True, True])        # True if all are True - O(n) worst case
 
-map(func, arr)           # Apply function to each
-filter(func, arr)        # Filter by function
-zip(arr1, arr2)          # Combine iterables
+map(func, arr)           # Apply function to each - O(1) to create, O(n) to iterate
+filter(func, arr)        # Filter by function - O(1) to create, O(n) to iterate
+zip(arr1, arr2)          # Combine iterables - O(1) to create, O(n) to iterate
 
-enumerate(arr)           # (index, value) pairs
-enumerate(arr, start=1)  # Start from 1
+enumerate(arr)           # (index, value) pairs - O(1) to create, O(n) to iterate
+enumerate(arr, start=1)  # Start from 1 - O(1) to create
 
-isinstance(obj, type)    # Check type
-type(obj)               # Get type
+isinstance(obj, type)    # Check type - O(1)
+type(obj)               # Get type - O(1)
 ```
 
 ### Type Conversions
 ```python
-int('123')               # String to int: 123
-float('3.14')           # String to float: 3.14
-str(123)                # Int to string: '123'
-chr(65)                 # ASCII to char: 'A'
-ord('A')                # Char to ASCII: 65
+int('123')               # String to int: 123 - O(n) where n is string length
+float('3.14')           # String to float: 3.14 - O(n)
+str(123)                # Int to string: '123' - O(log n) where n is the number
+chr(65)                 # ASCII to char: 'A' - O(1)
+ord('A')                # Char to ASCII: 65 - O(1)
 
-list('abc')             # String to list: ['a', 'b', 'c']
-list(range(5))          # Range to list: [0, 1, 2, 3, 4]
-tuple([1, 2, 3])        # List to tuple
-set([1, 2, 2, 3])       # List to set: {1, 2, 3}
+list('abc')             # String to list: ['a', 'b', 'c'] - O(n)
+list(range(5))          # Range to list: [0, 1, 2, 3, 4] - O(n)
+tuple([1, 2, 3])        # List to tuple - O(n)
+set([1, 2, 2, 3])       # List to set: {1, 2, 3} - O(n)
 
-bin(10)                 # To binary: '0b1010'
-hex(255)                # To hex: '0xff'
-oct(8)                  # To octal: '0o10'
+bin(10)                 # To binary: '0b1010' - O(log n)
+hex(255)                # To hex: '0xff' - O(log n)
+oct(8)                  # To octal: '0o10' - O(log n)
 ```
 
 ## String Operations
@@ -662,58 +667,59 @@ def dp_tabulation(n):
 ```python
 from collections import Counter
 
-c = Counter([1, 1, 2, 3, 3, 3])
-c = Counter('abracadabra')
+c = Counter([1, 1, 2, 3, 3, 3])  # O(n)
+c = Counter('abracadabra')        # O(n)
 
-c['a']                          # Count of 'a': 5
-c.most_common(2)                # [('a', 5), ('b', 2)]
-c.elements()                    # Iterator over elements
-c.total()                       # Sum of counts
-c.update(['a', 'b'])            # Add more elements
-c.subtract(['a', 'a'])          # Subtract elements
+c['a']                          # Count of 'a': 5 - O(1) average
+c.most_common(2)                # [('a', 5), ('b', 2)] - O(n log k) where k is argument
+c.elements()                    # Iterator over elements - O(1) to create, O(n) to iterate
+c.total()                       # Sum of counts - O(n)
+c.update(['a', 'b'])            # Add more elements - O(k) where k is size of update
+c.subtract(['a', 'a'])          # Subtract elements - O(k)
 
-c1 + c2                         # Add counts
-c1 - c2                         # Subtract (keep positive only)
-c1 & c2                         # Intersection (min)
-c1 | c2                         # Union (max)
+c1 + c2                         # Add counts - O(len(c1) + len(c2))
+c1 - c2                         # Subtract (keep positive only) - O(len(c1) + len(c2))
+c1 & c2                         # Intersection (min) - O(min(len(c1), len(c2)))
+c1 | c2                         # Union (max) - O(len(c1) + len(c2))
 ```
 
 ### defaultdict
 ```python
 from collections import defaultdict
 
-d = defaultdict(int)            # Default 0
-d = defaultdict(list)           # Default []
-d = defaultdict(set)            # Default set()
-d = defaultdict(lambda: 'default')
+d = defaultdict(int)            # Default 0 - O(1)
+d = defaultdict(list)           # Default [] - O(1)
+d = defaultdict(set)            # Default set() - O(1)
+d = defaultdict(lambda: 'default')  # O(1)
 
-d['key'].append(1)              # No KeyError
+d['key']                        # Access/create with default - O(1) average
+d['key'].append(1)              # No KeyError - O(1) average for access
 ```
 
 ### OrderedDict
 ```python
 from collections import OrderedDict
 
-d = OrderedDict()
-d['a'] = 1
-d['b'] = 2
+d = OrderedDict()                 # O(1)
+d['a'] = 1                        # O(1) average
+d['b'] = 2                        # O(1) average
 
-d.move_to_end('a')              # Move to end
-d.move_to_end('b', last=False)  # Move to beginning
-d.popitem(last=True)            # Pop from end
-d.popitem(last=False)           # Pop from beginning
+d.move_to_end('a')              # Move to end - O(1)
+d.move_to_end('b', last=False)  # Move to beginning - O(1)
+d.popitem(last=True)            # Pop from end - O(1)
+d.popitem(last=False)           # Pop from beginning - O(1)
 ```
 
 ### namedtuple
 ```python
 from collections import namedtuple
 
-Point = namedtuple('Point', ['x', 'y'])
-p = Point(1, 2)
+Point = namedtuple('Point', ['x', 'y'])  # O(1) - creates class
+p = Point(1, 2)                          # O(1) - creates instance
 
-p.x                             # 1
-p.y                             # 2
-p[0]                            # 1
+p.x                             # 1 - O(1)
+p.y                             # 2 - O(1)
+p[0]                            # 1 - O(1)
 ```
 
 ## Heapq Module
@@ -722,38 +728,38 @@ p[0]                            # 1
 ```python
 import heapq
 
-heap = []
-heapq.heappush(heap, 3)         # Add element
-heapq.heappush(heap, 1)
-heapq.heappush(heap, 2)
+heap = []                       # O(1)
+heapq.heappush(heap, 3)         # Add element - O(log n)
+heapq.heappush(heap, 1)         # O(log n)
+heapq.heappush(heap, 2)         # O(log n)
 
-heapq.heappop(heap)             # Remove and return min: 1
-heap[0]                         # Peek at min: 2
+heapq.heappop(heap)             # Remove and return min: 1 - O(log n)
+heap[0]                         # Peek at min: 2 - O(1)
 
-heapq.heapify([3, 1, 2])        # Convert list to heap
-heapq.nlargest(2, arr)          # 2 largest elements
-heapq.nsmallest(2, arr)         # 2 smallest elements
+heapq.heapify([3, 1, 2])        # Convert list to heap - O(n)
+heapq.nlargest(2, arr)          # 2 largest elements - O(n log k) where k is argument
+heapq.nsmallest(2, arr)         # 2 smallest elements - O(n log k)
 ```
 
 ### Max Heap
 ```python
 import heapq
 
-heap = []
-heapq.heappush(heap, -3)        # Negate values
-heapq.heappush(heap, -1)
-heapq.heappush(heap, -2)
+heap = []                       # O(1)
+heapq.heappush(heap, -3)        # Negate values - O(log n)
+heapq.heappush(heap, -1)        # O(log n)
+heapq.heappush(heap, -2)        # O(log n)
 
-max_val = -heapq.heappop(heap)  # Get max: 3
+max_val = -heapq.heappop(heap)  # Get max: 3 - O(log n)
 ```
 
 ### Heap with Custom Objects
 ```python
 import heapq
 
-heap = []
-heapq.heappush(heap, (priority, item))
-priority, item = heapq.heappop(heap)
+heap = []                                    # O(1)
+heapq.heappush(heap, (priority, item))       # O(log n)
+priority, item = heapq.heappop(heap)         # O(log n)
 ```
 
 ## Itertools Module
@@ -789,21 +795,21 @@ islice([1,2,3,4,5], 2)         # First 2: [1, 2]
 ```python
 arr = [3, 1, 2]
 
-arr.sort()                      # Sort in-place
-arr.sort(reverse=True)          # Descending
+arr.sort()                      # Sort in-place - O(n log n)
+arr.sort(reverse=True)          # Descending - O(n log n)
 
-sorted(arr)                     # Return sorted copy
-sorted(arr, reverse=True)       # Descending copy
+sorted(arr)                     # Return sorted copy - O(n log n)
+sorted(arr, reverse=True)       # Descending copy - O(n log n)
 ```
 
 ### Custom Sorting
 ```python
-# Sort by key function
+# Sort by key function - O(n log n) but key function called O(n log n) times
 arr.sort(key=lambda x: x[1])    # By 2nd element
 arr.sort(key=lambda x: (x[0], -x[1]))  # Multiple keys
 arr.sort(key=str.lower)         # Case-insensitive
 
-# Custom comparison (Python 3)
+# Custom comparison (Python 3) - O(n log n) with comparison function
 from functools import cmp_to_key
 
 def compare(a, b):
@@ -824,8 +830,8 @@ students = [
     ('Charlie', 22, 95)
 ]
 
-students.sort(key=lambda x: x[2], reverse=True)  # By score
-students.sort(key=lambda x: (x[1], -x[2]))       # By age, then score desc
+students.sort(key=lambda x: x[2], reverse=True)  # By score - O(n log n)
+students.sort(key=lambda x: (x[1], -x[2]))       # By age, then score desc - O(n log n)
 ```
 
 ## Binary Search
@@ -836,17 +842,18 @@ import bisect
 
 arr = [1, 3, 4, 4, 6, 8]
 
-bisect.bisect_left(arr, 4)      # 2 (leftmost insertion point)
-bisect.bisect_right(arr, 4)     # 4 (rightmost insertion point)
-bisect.bisect(arr, 4)           # Same as bisect_right
+bisect.bisect_left(arr, 4)      # 2 (leftmost insertion point) - O(log n)
+bisect.bisect_right(arr, 4)     # 4 (rightmost insertion point) - O(log n)
+bisect.bisect(arr, 4)           # Same as bisect_right - O(log n)
 
-bisect.insort_left(arr, 5)      # Insert maintaining order
-bisect.insort_right(arr, 5)
-bisect.insort(arr, 5)
+bisect.insort_left(arr, 5)      # Insert maintaining order - O(n)
+bisect.insort_right(arr, 5)     # O(n)
+bisect.insort(arr, 5)           # O(n)
 ```
 
 ### Manual Binary Search
 ```python
+# O(log n) - Binary search
 def binary_search(arr, target):
     left, right = 0, len(arr) - 1
     
@@ -862,6 +869,7 @@ def binary_search(arr, target):
     
     return -1
 
+# O(log n) - Find leftmost insertion point
 def binary_search_leftmost(arr, target):
     left, right = 0, len(arr)
     
@@ -875,6 +883,7 @@ def binary_search_leftmost(arr, target):
     
     return left
 
+# O(log n) - Find rightmost insertion point
 def binary_search_rightmost(arr, target):
     left, right = 0, len(arr)
     
@@ -893,30 +902,31 @@ def binary_search_rightmost(arr, target):
 
 ### Basic Operations
 ```python
-x & y                   # AND
-x | y                   # OR
-x ^ y                   # XOR
-~x                      # NOT
-x << n                  # Left shift (multiply by 2^n)
-x >> n                  # Right shift (divide by 2^n)
+x & y                   # AND - O(1)
+x | y                   # OR - O(1)
+x ^ y                   # XOR - O(1)
+~x                      # NOT - O(1)
+x << n                  # Left shift (multiply by 2^n) - O(1)
+x >> n                  # Right shift (divide by 2^n) - O(1)
 
-x & 1                   # Check if odd
-x & (x - 1)             # Clear rightmost bit
-x & -x                  # Get rightmost bit
-x | (1 << n)            # Set nth bit
-x & ~(1 << n)           # Clear nth bit
-x ^ (1 << n)            # Toggle nth bit
-(x >> n) & 1            # Get nth bit
+x & 1                   # Check if odd - O(1)
+x & (x - 1)             # Clear rightmost bit - O(1)
+x & -x                  # Get rightmost bit - O(1)
+x | (1 << n)            # Set nth bit - O(1)
+x & ~(1 << n)           # Clear nth bit - O(1)
+x ^ (1 << n)            # Toggle nth bit - O(1)
+(x >> n) & 1            # Get nth bit - O(1)
 
-bin(x)                  # To binary string
-int('1010', 2)          # Binary string to int
+bin(x)                  # To binary string - O(log x)
+int('1010', 2)          # Binary string to int - O(n) where n is string length
 
-x.bit_length()          # Number of bits
-x.bit_count()           # Number of 1s (Python 3.10+)
+x.bit_length()          # Number of bits - O(1)
+x.bit_count()           # Number of 1s (Python 3.10+) - O(1)
 ```
 
 ### Common Patterns
 ```python
+# O(k) where k is number of 1 bits
 def count_ones(n):
     count = 0
     while n:
@@ -924,9 +934,11 @@ def count_ones(n):
         count += 1
     return count
 
+# O(1) - Check if power of two
 def is_power_of_two(n):
     return n > 0 and (n & (n - 1)) == 0
 
+# O(1) - Swap without temp variable
 def swap_without_temp(a, b):
     a ^= b
     b ^= a
